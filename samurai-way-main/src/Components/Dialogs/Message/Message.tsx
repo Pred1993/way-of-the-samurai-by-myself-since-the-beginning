@@ -1,12 +1,24 @@
 import classes from "./Message.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
-
-type MessagePropsType = {
+export type MessageDataType = {
     message: string
+    id: number
 }
-export const Message = (props:MessagePropsType) => {
+export type MessageDataPropsType = {
+    messagesData: Array<MessageDataType>
+}
+export const Message = (props:MessageDataPropsType) => {
+    let resultMessage = props.messagesData.map((t) => {
+        return (
+            <div className={classes.message} key={t.id}>
+                {t.message}
+            </div>
+        )
+    })
     return (
-        <div className={classes.message}>{props.message}</div>
+        <div>
+            {resultMessage}
+        </div>
     )
 }

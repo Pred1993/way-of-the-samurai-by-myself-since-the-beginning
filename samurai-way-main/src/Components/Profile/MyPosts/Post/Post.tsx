@@ -1,16 +1,29 @@
 import React from "react";
 import classes from './Post.module.css'
 
-export type PostPropsType = {
+export type PostDataType = {
     message: string
     likesCounts: number
+    id: number
+    img: string
+}
+export type PostPropsType = {
+    postData: Array<PostDataType>
 }
 export const Post = (props: PostPropsType) => {
+    let resultPost = props.postData.map((t) => {
+        return (
+            <div className={classes.item} key={t.id}>
+                <img
+                    src={t.img}/>
+                {t.message}
+                <div><span>{t.likesCounts}</span></div>
+            </div>
+        )
+    })
     return (
-        <div className={classes.item}>
-            <img src='https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'/>
-            {props.message}
-            <div><span>{props.likesCounts}</span></div>
+        <div>
+            {resultPost}
         </div>
     )
 }
