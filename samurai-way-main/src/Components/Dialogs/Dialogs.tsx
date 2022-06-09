@@ -1,36 +1,25 @@
 import React from "react";
 import classes from './Dialogs.module.css'
+import {NavLink} from "react-router-dom";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
 
 export const Dialogs = () => {
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItem}>
-                <div className={classes.dialog}>
-                    Andrey
-                </div>
-                <div className={`${classes.dialog} ${classes.active}`}>
-                    Andrey
-                </div>
-                <div className={classes.dialog}>
-                    Andrey
-                </div>
-                <div className={classes.dialog}>
-                    Andrey
-                </div>
-                <div className={classes.dialog}>
-                    Andrey
-                </div>
-                <div className={classes.dialog}>
-                    Andrey
-                </div>
+                <DialogItem name={'Artem'} id={'1'}/>
+                <DialogItem name={'Denis'} id={'2'}/>
+                <DialogItem name={'Elena'} id={'3'}/>
+                <DialogItem name={'Igor'} id={'4'}/>
+                <DialogItem name={'Nikolay'} id={'5'}/>
             </div>
             <div className={classes.messages}>
-                <div className={classes.message}>Hello</div>
-                <div className={classes.message}>Nice</div>
-                <div className={classes.message}>Like</div>
-                <div className={classes.message}>Easy</div>
-                <div className={classes.message}>The best</div>
-                <div className={classes.message}>Ok!</div>
+                <Message message={'Hello'}/>
+                <Message message={'Nice'}/>
+                <Message message={'Good morning'}/>
+                <Message message={'How are you?'}/>
+                <Message message={'Ok!'}/>
             </div>
         </div>
     )

@@ -5,10 +5,10 @@ import {Post} from "./Post/Post";
 export const MyPost = () => {
     return (
 
-        <div>
-            My posts
+        <div className={classes.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
+                <div><textarea></textarea></div>
                 <button>Add post</button>
                 <button>Remove</button>
             </div>
