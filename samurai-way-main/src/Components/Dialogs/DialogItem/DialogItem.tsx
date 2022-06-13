@@ -1,15 +1,12 @@
 import classes from "./DialogsItem.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
-
-export type DialogsDataType = {
-    name: string
-    id: number
-}
+import {DialogsDataType} from "../../../redax/state";
 export type DialogItemPropsType = {
-    dialogsData: Array<DialogsDataType>
+    dialogsData:Array<DialogsDataType>
 }
-export const DialogItem = (props: DialogItemPropsType) => {
+
+export const DialogItem = (props:DialogItemPropsType) => {
     const resultDialogItem = props.dialogsData.map((t) => {
         let path = `/dialogs/${t.id}`
         return (

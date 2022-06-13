@@ -8,18 +8,11 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
 import {Setting} from "./Components/Setting/Setting";
 import {News} from "./Components/News/News";
-import {PostDataType} from "./Components/Profile/MyPosts/Post/Post";
-import {DialogsDataType} from "./Components/Dialogs/DialogItem/DialogItem";
-import {MessageDataType} from "./Components/Dialogs/Message/Message";
-export  type AppPropsType = {
-    postData: Array<PostDataType>
-    dialogsData: Array<DialogsDataType>
-    messagesData: Array<MessageDataType>
+import {StateType} from "./redax/state";
+export type AppPropsType = {
+    state: StateType
 }
-
-
-
-function App(props: AppPropsType) {
+function App(props:AppPropsType) {
     return (
         <BrowserRouter>
             <div className='app'>
@@ -27,11 +20,11 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className='appContent'>
                     <Route path='/dialogs' render={() => <Dialogs
-                        dialogsData={props.dialogsData}
-                        messagesData={props.messagesData}
+                        dialogsData={props.state.messagesPage.dialogsData}
+                        messagesData={props.state.messagesPage.messagesData}
                     />}/>
                     <Route path='/profile' render={() => <Profile
-                        postData={props.postData}
+                        postData={props.state.profilePage.postData}
                     />}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/setting' component={Setting}/>

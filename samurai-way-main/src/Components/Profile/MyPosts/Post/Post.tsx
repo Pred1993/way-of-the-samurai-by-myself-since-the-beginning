@@ -1,16 +1,8 @@
 import React from "react";
 import classes from './Post.module.css'
+import {ProfilePropsType} from "../../Profile";
 
-export type PostDataType = {
-    message: string
-    likesCounts: number
-    id: number
-    img: string
-}
-export type PostPropsType = {
-    postData: Array<PostDataType>
-}
-export const Post = (props: PostPropsType) => {
+export const Post = (props: ProfilePropsType) => {
     let resultPost = props.postData.map(t =>
         <div className={classes.item} key={t.id}>
             <img

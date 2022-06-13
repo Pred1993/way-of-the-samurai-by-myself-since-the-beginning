@@ -1,11 +1,10 @@
 import React from "react";
 import classes from './MyPosts.module.css'
-import {Post, PostDataType} from "./Post/Post";
-import {MessageDataType} from "../../Dialogs/Message/Message";
-export type MyPostPropsType = {
-    postData: Array<PostDataType>
-}
-export const MyPost = (props: MyPostPropsType) => {
+import {Post} from "./Post/Post";
+
+import {ProfilePropsType} from "../Profile";
+
+export const MyPost = (props: ProfilePropsType) => {
     return (
 
         <div className={classes.postsBlock}>
