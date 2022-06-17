@@ -9,10 +9,13 @@ import {Music} from "./Components/Music/Music";
 import {Setting} from "./Components/Setting/Setting";
 import {News} from "./Components/News/News";
 import {StateType} from "./redax/state";
+
 export type AppPropsType = {
     state: StateType
+    addPost: (name: string) => void
 }
-function App(props:AppPropsType) {
+
+function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className='app'>
@@ -25,6 +28,7 @@ function App(props:AppPropsType) {
                     />}/>
                     <Route path='/profile' render={() => <Profile
                         postData={props.state.profilePage.postData}
+                        addPost={props.addPost}
                     />}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/setting' component={Setting}/>

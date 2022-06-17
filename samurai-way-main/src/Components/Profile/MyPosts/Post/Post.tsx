@@ -1,8 +1,11 @@
 import React from "react";
 import classes from './Post.module.css'
-import {ProfilePropsType} from "../../Profile";
+import {PostDataType} from "../../../../redax/state";
 
-export const Post = (props: ProfilePropsType) => {
+export type PostPropsType = {
+    postData: Array<PostDataType>
+}
+export const Post = (props: PostPropsType) => {
     let resultPost = props.postData.map(t =>
         <div className={classes.item} key={t.id}>
             <img

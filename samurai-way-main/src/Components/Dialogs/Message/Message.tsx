@@ -13,10 +13,15 @@ export const Message = (props: MessagePropsType) => {
             {t.message}
         </div>
     )
-
+    let newMessageElement = React.createRef <HTMLTextAreaElement>()
+const onClickHandlerMessage = () => {
+        alert(newMessageElement.current?.value)
+}
     return (
         <div>
             {resultMessage}
+            <div><textarea ref={newMessageElement}></textarea></div>
+            <button onClick={onClickHandlerMessage}>Add post</button>
         </div>
     )
 }

@@ -11,6 +11,8 @@ export const DialogItem = (props:DialogItemPropsType) => {
         let path = `/dialogs/${t.id}`
         return (
             <div className={classes.dialog} key={t.id}>
+                <img src={t.img} alt="avatar"/>
+                <br/>
                 <NavLink to={path}>{t.name}</NavLink>
             </div>)
     })
