@@ -1,4 +1,3 @@
-import {rerenderEntireTree} from "../render";
 
 export type MessagesDataType = {
     id: number
@@ -18,11 +17,13 @@ export type PostDataType = {
 }
 export type ProfilePageType = {
     postData: Array<PostDataType>
+    newText: string
 }
 
 export type MessagesPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
+    newMessage: string
 }
 
 export type StateType = {
@@ -64,6 +65,7 @@ export let state: StateType = {
                 img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
             }
         ],
+        newText: ''
     },
     messagesPage: {
         dialogsData: [
@@ -89,17 +91,46 @@ export let state: StateType = {
             {id: 2, message: 'Nice'},
             {id: 3, message: 'Good morning'},
             {id: 4, message: 'How are you?'},
-        ]
+        ],
+        newMessage: ''
     }
 }
-export const addPost = (name: string) => {
-    debugger
+let rerenderEntireTree = (state: StateType) => {
+    console.log('awdawd')
+}
+
+export const addPost = () => {
     const newObjectPostData: PostDataType = {
-        id: 1,
-        message: name,
+        id: 6,
+        message: state.profilePage.newText,
         likesCounts: 5,
         img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
     }
-    let dad = state.profilePage.postData.push(newObjectPostData)
-    rerenderEntireTree(state, addPost)
+    state.profilePage.postData.push(newObjectPostData)
+    state.profilePage.newText = ''
+    rerenderEntireTree(state)
 }
+export const updateNewPostText = (newText: string) => {
+
+    state.profilePage.newText = newText
+    rerenderEntireTree(state)
+}
+
+export const addMessage = () => {
+    const newObjectMessageData = {
+        id: 1, message: state.messagesPage.newMessage
+    }
+    state.messagesPage.messagesData.push(newObjectMessageData)
+    state.messagesPage.newMessage = ''
+    rerenderEntireTree(state)
+}
+
+export const updateNewMessage = (newMessage: string) => {
+    state.messagesPage.newMessage = newMessage
+    rerenderEntireTree(state)
+}
+
+export const subscriber = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer
+}
+

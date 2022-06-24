@@ -1,9 +1,12 @@
 import classes from "./Message.module.css";
-import React from "react";
-import {MessagesDataType} from "../../../redax/state";
+import React, {ChangeEvent} from "react";
+import {MessagesDataType, updateNewPostText} from "../../../redax/state";
 
 export type MessagePropsType = {
     messagesData: Array<MessagesDataType>
+    updateNewMessage: (newMessage: string) => void
+    addMessage: () => void
+    newMessage: string
 }
 
 
@@ -13,14 +16,17 @@ export const Message = (props: MessagePropsType) => {
             {t.message}
         </div>
     )
-    let newMessageElement = React.createRef <HTMLTextAreaElement>()
-const onClickHandlerMessage = () => {
-        alert(newMessageElement.current?.value)
-}
+
+    const onClickHandlerMessage = () => {
+       props.addMessage()
+    }
+    const onChangeHandlerNewMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewMessage(e.currentTarget.value)
+    }
     return (
         <div>
             {resultMessage}
-            <div><textarea ref={newMessageElement}></textarea></div>
+            <div><textarea onChange={onChangeHandlerNewMessage} value={props.newMessage}/></div>
             <button onClick={onClickHandlerMessage}>Add post</button>
         </div>
     )

@@ -2,7 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from "./App";
-import {addPost, state, StateType} from "./redax/state";
-import {rerenderEntireTree} from "./render";
+import {addMessage, addPost, state, StateType, subscriber, updateNewMessage, updateNewPostText} from "./redax/state";
 
-rerenderEntireTree(state, addPost)
+export const  rerenderEntireTree = (state :StateType ) => {
+    ReactDOM.render(
+        <App
+            state={state}
+            addPost={addPost}
+            updateNewPostText={updateNewPostText}
+            addMessage={addMessage}
+            updateNewMessage={updateNewMessage}
+        />,
+        document.getElementById('root')
+    );
+}
+rerenderEntireTree(state)
+subscriber(rerenderEntireTree)

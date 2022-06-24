@@ -6,7 +6,9 @@ import {PostDataType} from "../../redax/state";
 
 export type ProfilePropsType = {
     postData: Array<PostDataType>
-    addPost: (name: string) => void
+    addPost: () => void
+    newText: string
+    updateNewPostText: (newText: string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -16,6 +18,8 @@ export const Profile = (props: ProfilePropsType) => {
             <MyPost
                 postData={props.postData}
                 addPost={props.addPost}
+                newText={props.newText}
+                updateNewPostText={props.updateNewPostText}
             />
         </main>
     )
