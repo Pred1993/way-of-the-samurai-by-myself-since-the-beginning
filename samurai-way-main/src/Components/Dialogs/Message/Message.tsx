@@ -1,6 +1,6 @@
 import classes from "./Message.module.css";
 import React, {ChangeEvent} from "react";
-import {MessagesDataType, updateNewPostText} from "../../../redax/state";
+import {MessagesDataType} from "../../../redax/state";
 
 export type MessagePropsType = {
     messagesData: Array<MessagesDataType>
