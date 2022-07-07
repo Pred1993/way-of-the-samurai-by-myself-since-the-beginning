@@ -1,4 +1,3 @@
-
 export type MessagesDataType = {
     id: number
     message: string
@@ -32,14 +31,26 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType
-    addMessage: () => void
-    updateNewMessage: (newMessage: string) => void
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
     _rerenderEntireTree: (state: StateType) => void
     subscriber: (observer: (state: StateType) => void) => void
     getState: () => StateType
+    dispatch: (action: ActionType) => void
 }
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+}
+type UpdateNewMessageActionType = {
+    type: 'UPDATE-NEW-MESSAGE'
+    newMessage: string
+}
+export type ActionType = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageActionType
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -79,7 +90,11 @@ export let store: StoreType = {
         },
         messagesPage: {
             dialogsData: [
-                {id: 1, name: 'Artem', img: 'https://author.today/content/2021/03/25/8488dde4a706465f96bf00ec457e4ec3.png'},
+                {
+                    id: 1,
+                    name: 'Artem',
+                    img: 'https://author.today/content/2021/03/25/8488dde4a706465f96bf00ec457e4ec3.png'
+                },
                 {
                     id: 2,
                     name: 'Denis',
@@ -105,41 +120,40 @@ export let store: StoreType = {
             newMessage: ''
         }
     },
-    addPost () {
-        const newObjectPostData: PostDataType = {
-            id: 6,
-            message: this._state.profilePage.newText,
-            likesCounts: 5,
-            img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
-        }
-        this._state.profilePage.postData.push(newObjectPostData)
-        this._state.profilePage.newText = ''
-        this._rerenderEntireTree(this._state)
-    },
-    updateNewPostText (newText: string) {
-        this._state.profilePage.newText = newText
-        this._rerenderEntireTree(this._state)
-    },
-    addMessage () {
-        const newObjectMessageData = {
-            id: 1, message: this._state.messagesPage.newMessage
-        }
-        this._state.messagesPage.messagesData.push(newObjectMessageData)
-        this._state.messagesPage.newMessage = ''
-        this._rerenderEntireTree(this._state)
-    },
-    updateNewMessage (newMessage: string) {
-        this._state.messagesPage.newMessage = newMessage
-        this._rerenderEntireTree(this._state)
-    },
-    subscriber (observer) {
-        this._rerenderEntireTree = observer
-    },
-    _rerenderEntireTree (state: StateType) {
+    _rerenderEntireTree(state: StateType) {
         console.log('State changed')
+    },
+    subscriber(observer) {
+        this._rerenderEntireTree = observer
     },
     getState() {
         return this._state
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newObjectPostData: PostDataType = {
+                id: 6,
+                message: this._state.profilePage.newText,
+                likesCounts: 5,
+                img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
+            }
+            this._state.profilePage.postData.push(newObjectPostData)
+            this._state.profilePage.newText = ''
+            this._rerenderEntireTree(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newText = action.newText
+            this._rerenderEntireTree(this._state)
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newObjectMessageData = {
+                id: 1, message: this._state.messagesPage.newMessage
+            }
+            this._state.messagesPage.messagesData.push(newObjectMessageData)
+            this._state.messagesPage.newMessage = ''
+            this._rerenderEntireTree(this._state)
+        } else if (action.type === 'UPDATE-NEW-MESSAGE') {
+            this._state.messagesPage.newMessage = action.newMessage
+            this._rerenderEntireTree(this._state)
+        }
     }
 }
 // window.store = store

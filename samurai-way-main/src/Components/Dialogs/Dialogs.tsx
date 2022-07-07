@@ -2,13 +2,12 @@ import React from "react";
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsDataType, MessagesDataType} from "../../redax/state";
+import {ActionType, DialogsDataType, MessagesDataType} from "../../redax/state";
 
 export type DialogsPropsType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    addMessage: () => void
-    updateNewMessage: (newMessage: string) => void
+    dispatch: (action: ActionType) => void
     newMessage: string
 }
 export const Dialogs = (props: DialogsPropsType) => {
@@ -19,8 +18,8 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={classes.messages}>
                 <Message messagesData={props.messagesData}
-                         addMessage={props.addMessage} updateNewMessage={props.updateNewMessage}
                          newMessage={props.newMessage}
+                         dispatch={props.dispatch}
                 />
             </div>
         </div>
