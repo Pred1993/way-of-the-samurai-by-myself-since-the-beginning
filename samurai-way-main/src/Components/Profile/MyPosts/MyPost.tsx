@@ -2,17 +2,18 @@ import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
-import {ProfilePropsType} from "../Profile";
-import actions from "redux-form/lib/actions";
-import {ActionType} from "../../../redax/state";
 
+
+
+import {ProfilePropsType} from "../Profile";
+import {AddPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redax/state";
 export const MyPost = (props: ProfilePropsType) => {
     const onClickHandlerAddPost = () => {
-        props.dispatch({ type: "ADD-POST"})
+        props.dispatch(AddPostActionCreator())
         }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value})
+        props.dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value))
     }
     return (
         <div className={classes.postsBlock}>

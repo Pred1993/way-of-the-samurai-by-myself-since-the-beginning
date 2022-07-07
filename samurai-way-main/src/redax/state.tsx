@@ -36,21 +36,29 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionType) => void
 }
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostTextType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-}
-type UpdateNewMessageActionType = {
-    type: 'UPDATE-NEW-MESSAGE'
-    newMessage: string
-}
+type AddPostActionType = ReturnType<typeof AddPostActionCreator>
+type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextActionCreator>
+type AddMessageActionType = ReturnType<typeof AddMessageActionCreator>
+type UpdateNewMessageActionType = ReturnType<typeof UpdateNewMessageActionCreator>
 export type ActionType = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageActionType
+
+export const AddPostActionCreator = () => ({type: "ADD-POST"}) as const
+
+export const UpdateNewPostTextActionCreator = (newText: string) => ({
+    type: "UPDATE-NEW-POST-TEXT",
+    newText: newText
+}) as const
+
+
+export const AddMessageActionCreator = () => ({type: "ADD-MESSAGE"}) as const
+
+export const UpdateNewMessageActionCreator = (newMessage: string) =>
+    ({
+        type: "UPDATE-NEW-MESSAGE",
+        newMessage: newMessage
+    }) as const
+
+
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -120,7 +128,7 @@ export let store: StoreType = {
             newMessage: ''
         }
     },
-    _rerenderEntireTree(state: StateType) {
+    _rerenderEntireTree() {
         console.log('State changed')
     },
     subscriber(observer) {
@@ -156,8 +164,6 @@ export let store: StoreType = {
         }
     }
 }
-// window.store = store
-
 
 
 

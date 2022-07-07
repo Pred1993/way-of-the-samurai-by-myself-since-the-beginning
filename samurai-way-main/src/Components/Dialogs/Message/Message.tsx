@@ -1,6 +1,11 @@
 import classes from "./Message.module.css";
 import React, {ChangeEvent} from "react";
-import {ActionType, MessagesDataType} from "../../../redax/state";
+import {
+    ActionType,
+    AddMessageActionCreator,
+    MessagesDataType,
+    UpdateNewMessageActionCreator
+} from "../../../redax/state";
 
 export type MessagePropsType = {
     messagesData: Array<MessagesDataType>
@@ -16,10 +21,10 @@ export const Message = (props: MessagePropsType) => {
         </div>
     )
     const onClickHandlerMessage = () => {
-       props.dispatch({type: "ADD-MESSAGE"})
+       props.dispatch(AddMessageActionCreator())
     }
     const onChangeHandlerNewMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE-NEW-MESSAGE", newMessage: e.currentTarget.value})
+        props.dispatch(UpdateNewMessageActionCreator(e.currentTarget.value))
     }
     return (
         <div>
