@@ -2,10 +2,11 @@ import classes from "./Message.module.css";
 import React, {ChangeEvent} from "react";
 import {
     ActionType,
-    AddMessageActionCreator,
+
     MessagesDataType,
-    UpdateNewMessageActionCreator
+
 } from "../../../redax/state";
+import {AddMessageActionCreator, UpdateNewMessageActionCreator} from "../../../redax/messagePage-reducer";
 
 export type MessagePropsType = {
     messagesData: Array<MessagesDataType>

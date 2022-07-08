@@ -1,3 +1,7 @@
+import profilePageReducer, {AddPostActionCreator, UpdateNewPostTextActionCreator} from "./profilePage-reducer";
+import sideBarReducer from "./sidebar-reducer";
+import messagePageReducer, {AddMessageActionCreator, UpdateNewMessageActionCreator} from "./messagePage-reducer";
+
 export type MessagesDataType = {
     id: number
     message: string
@@ -28,6 +32,7 @@ export type MessagesPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
+    sidebar: any
 }
 export type StoreType = {
     _state: StateType
@@ -40,24 +45,8 @@ type AddPostActionType = ReturnType<typeof AddPostActionCreator>
 type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextActionCreator>
 type AddMessageActionType = ReturnType<typeof AddMessageActionCreator>
 type UpdateNewMessageActionType = ReturnType<typeof UpdateNewMessageActionCreator>
+
 export type ActionType = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageActionType
-
-export const AddPostActionCreator = () => ({type: "ADD-POST"}) as const
-
-export const UpdateNewPostTextActionCreator = (newText: string) => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: newText
-}) as const
-
-
-export const AddMessageActionCreator = () => ({type: "ADD-MESSAGE"}) as const
-
-export const UpdateNewMessageActionCreator = (newMessage: string) =>
-    ({
-        type: "UPDATE-NEW-MESSAGE",
-        newMessage: newMessage
-    }) as const
-
 
 export let store: StoreType = {
     _state: {
@@ -126,7 +115,8 @@ export let store: StoreType = {
                 {id: 4, message: 'How are you?'},
             ],
             newMessage: ''
-        }
+        },
+        sidebar: {}
     },
     _rerenderEntireTree() {
         console.log('State changed')
@@ -138,30 +128,10 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newObjectPostData: PostDataType = {
-                id: 6,
-                message: this._state.profilePage.newText,
-                likesCounts: 5,
-                img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
-            }
-            this._state.profilePage.postData.push(newObjectPostData)
-            this._state.profilePage.newText = ''
-            this._rerenderEntireTree(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newText = action.newText
-            this._rerenderEntireTree(this._state)
-        } else if (action.type === 'ADD-MESSAGE') {
-            const newObjectMessageData = {
-                id: 1, message: this._state.messagesPage.newMessage
-            }
-            this._state.messagesPage.messagesData.push(newObjectMessageData)
-            this._state.messagesPage.newMessage = ''
-            this._rerenderEntireTree(this._state)
-        } else if (action.type === 'UPDATE-NEW-MESSAGE') {
-            this._state.messagesPage.newMessage = action.newMessage
-            this._rerenderEntireTree(this._state)
-        }
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+        this._state.messagesPage = messagePageReducer(this._state.messagesPage, action)
+        this._state.sidebar = sideBarReducer(this._state.sidebar, action)
+        this._rerenderEntireTree(this._state)
     }
 }
 
