@@ -5,8 +5,8 @@ import {
 
     MessagesDataType,
 
-} from "../../../redax/state";
-import {AddMessageActionCreator, UpdateNewMessageActionCreator} from "../../../redax/messagePage-reducer";
+} from "../../../redux/store";
+import {AddMessageActionCreator, UpdateNewMessageActionCreator} from "../../../redux/messagePage-reducer";
 
 export type MessagePropsType = {
     messagesData: Array<MessagesDataType>

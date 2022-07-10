@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './Post.module.css'
-import {PostDataType} from "../../../../redax/state";
+import {PostDataType} from "../../../../redux/store";
 
 export type PostPropsType = {
     postData: Array<PostDataType>

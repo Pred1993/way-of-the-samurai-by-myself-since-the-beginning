@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {ProfilePropsType} from "../Profile";
-import {AddPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redax/profilePage-reducer";
+import {AddPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redux/profilePage-reducer";
 export const MyPost = (props: ProfilePropsType) => {
     const onClickHandlerAddPost = () => {
         props.dispatch(AddPostActionCreator())
