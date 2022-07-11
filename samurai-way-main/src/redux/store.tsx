@@ -37,7 +37,7 @@ export type StateType = {
 export type StoreType = {
     _state: StateType
     _rerenderEntireTree: (state: StateType) => void
-    subscriber: (observer: (state: StateType) => void) => void
+    subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
     dispatch: (action: ActionType) => void
 }
@@ -121,7 +121,7 @@ export let store: StoreType = {
     _rerenderEntireTree() {
         console.log('State changed')
     },
-    subscriber(observer) {
+    subscribe(observer) {
         this._rerenderEntireTree = observer
     },
     getState() {

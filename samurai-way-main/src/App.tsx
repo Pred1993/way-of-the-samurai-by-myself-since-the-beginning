@@ -8,11 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
 import {Setting} from "./Components/Setting/Setting";
 import {News} from "./Components/News/News";
-import {ActionType, StateType,} from "./redux/store";
+import {StoreReduxType} from "./redux/redux-store";
 
 export type AppPropsType = {
-    state: StateType
-    dispatch: (action: ActionType) => void
+    // state: StateType
+    // dispatch: (action: ActionType) => void
+    store:  StoreReduxType
 }
 
 function App(props: AppPropsType) {
@@ -23,16 +24,17 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className='appContent'>
                     <Route path='/dialogs' render={() => <Dialogs
-                        dialogsData={props.state.messagesPage.dialogsData}
-                        messagesData={props.state.messagesPage.messagesData}
-                        newMessage={props.state.messagesPage.newMessage}
-                        dispatch={props.dispatch}
-
+                        // dialogsData={props.state.messagesPage.dialogsData}
+                        // messagesData={props.state.messagesPage.messagesData}
+                        // newMessage={props.state.messagesPage.newMessage}
+                        // dispatch={props.dispatch}
+                        store={props.store}
                     />}/>
                     <Route path='/profile' render={() => <Profile
-                        postData={props.state.profilePage.postData}
-                        newText={props.state.profilePage.newText}
-                        dispatch={props.dispatch}
+                        // postData={props.state.profilePage.postData}
+                        // newText={props.state.profilePage.newText}
+                        // dispatch={props.dispatch}
+                        store={props.store}
                     />}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/setting' component={Setting}/>

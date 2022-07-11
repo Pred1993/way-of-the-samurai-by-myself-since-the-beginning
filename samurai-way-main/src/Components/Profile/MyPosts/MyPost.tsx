@@ -1,15 +1,22 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ProfilePropsType} from "../Profile";
-import {AddPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redux/profilePage-reducer";
-export const MyPost = (props: ProfilePropsType) => {
+import {PostDataType} from "../../../redux/store";
+export type MyPostPropsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+    postData: Array<PostDataType>
+    newText: string
+}
+
+export const MyPost = (props: MyPostPropsType) => {
     const onClickHandlerAddPost = () => {
-        props.dispatch(AddPostActionCreator())
+        props.addPost()
         }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value))
+        let text = e.currentTarget.value
+        props.updateNewPostText(text)
     }
     return (
         <div className={classes.postsBlock}>
