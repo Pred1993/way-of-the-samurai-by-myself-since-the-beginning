@@ -1,4 +1,4 @@
-import {ActionType, PostDataType, ProfilePageType} from "./store";
+import {ActionType} from "./store";
 
 export const AddPostActionCreator = () => ({type: "ADD-POST"}) as const
 
@@ -7,6 +7,17 @@ export const UpdateNewPostTextActionCreator = (newText: string) => ({
     newText: newText
 }) as const
 
+export type ProfilePageType = {
+    postData: Array<PostDataType>
+    newText: string
+}
+
+export type PostDataType = {
+    id: number
+    message: string
+    likesCounts: number
+    img: string
+}
 let initialState =  {
     postData: [
         {
@@ -39,11 +50,12 @@ let initialState =  {
             likesCounts: 5,
             img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
         }
-    ],
+    ] as Array<PostDataType>,
     newText: ''
 }
+export type InitialStateType = typeof initialState
 
-const profilePageReducer = (state : ProfilePageType = initialState, action: ActionType) => {
+const profilePageReducer = (state : InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST':
             const newObjectPostData: PostDataType = {
@@ -52,12 +64,9 @@ const profilePageReducer = (state : ProfilePageType = initialState, action: Acti
                 likesCounts: 5,
                 img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png'
             }
-            state.postData.push(newObjectPostData)
-            state.newText = ''
-            return state
+            return {...state, postData: [...state.postData, newObjectPostData], newText: ''}
         case 'UPDATE-NEW-POST-TEXT':
-            state.newText = action.newText
-            return state
+            return {...state, newText: action.newText}
         default:
             return state
     }

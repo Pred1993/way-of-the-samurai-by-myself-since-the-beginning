@@ -1,19 +1,13 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostDataType} from "../../../redux/store";
-export type MyPostPropsType = {
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-    postData: Array<PostDataType>
-    newText: string
-}
+import {mapDispatchToPropsType, mapStateToPropsType} from "./MyPost.Container";
+export type MyPostPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export const MyPost = (props: MyPostPropsType) => {
     const onClickHandlerAddPost = () => {
         props.addPost()
         }
-
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
         props.updateNewPostText(text)

@@ -1,4 +1,4 @@
-import {ActionType, MessagesPageType} from "./store";
+import {ActionType} from "./store";
 
 export const AddMessageActionCreator = () => ({type: "ADD-MESSAGE"}) as const
 
@@ -8,7 +8,24 @@ export const UpdateNewMessageActionCreator = (newMessage: string) =>
         newMessage: newMessage
     }) as const
 
-let initialState =  {
+export type DialogsDataType = {
+    id: number
+    name: string
+    img: string
+}
+
+export type MessagesDataType = {
+    id: number
+    message: string
+}
+export type MessagesPageType = {
+    dialogsData: Array<DialogsDataType>
+    messagesData: Array<MessagesDataType>
+    newMessage: string
+}
+export type InitialStateType = MessagesPageType
+
+let initialState: InitialStateType =  {
     dialogsData: [
         {
             id: 1,
@@ -40,18 +57,16 @@ let initialState =  {
     newMessage: ''
 }
 
-const messagePageReducer = (state: MessagesPageType = initialState, action: ActionType) => {
+
+const messagePageReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newObjectMessageData = {
                 id: 5, message: state.newMessage
             }
-            state.messagesData.push(newObjectMessageData)
-            state.newMessage = ''
-            return state
+            return {...state, messagesData: [...state.messagesData, newObjectMessageData], newMessage: ''}
         case 'UPDATE-NEW-MESSAGE':
-            state.newMessage = action.newMessage
-            return state
+            return {...state, newMessage: action.newMessage}
         default:
             return state
     }

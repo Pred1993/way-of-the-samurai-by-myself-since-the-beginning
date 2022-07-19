@@ -1,27 +1,37 @@
 import React from "react";
-import {AddMessageActionCreator, UpdateNewMessageActionCreator} from "../../../redux/messagePage-reducer";
+import {
+    AddMessageActionCreator, MessagesDataType,
+    UpdateNewMessageActionCreator
+} from "../../../redux/messagePage-reducer";
 import {Message} from "./Message";
-import {StoreReduxType} from "../../../redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {AppStateType} from "../../../redux/redux-store";
 
-export type MessageContainerPropsType = {
-    store: StoreReduxType
+export type MapStateToProps = {
+    messagesData: Array<MessagesDataType>,
+    newMessage: string
+}
+
+export type MapDispatchToPropsType = {
+    onClick: () => void
+    onChange: (newMessage: string) => void
 }
 
 
-export const MessageContainer = (props: MessageContainerPropsType) => {
-
-    const onClickHandlerMessage = () => {
-        props.store.dispatch(AddMessageActionCreator())
+let mapStateToProps = (state: AppStateType): MapStateToProps => {
+    return {
+        messagesData: state.messagesPage.messagesData,
+        newMessage: state.messagesPage.newMessage
     }
-    const onChangeHandlerNewMessage = (newMessage: string) => {
-        props.store.dispatch(UpdateNewMessageActionCreator(newMessage))
-    }
-    return (
-        <Message
-            messagesData={props.store.getState().messagesPage.messagesData}
-            newMessage={props.store.getState().messagesPage.newMessage}
-            onClick={onClickHandlerMessage}
-            onChange={onChangeHandlerNewMessage}
-        />
-    )
 }
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        onClick: () => {dispatch(AddMessageActionCreator())},
+        onChange: (newMessage: string) => {dispatch(UpdateNewMessageActionCreator(newMessage))}
+    }
+}
+
+const MessageContainer = connect(mapStateToProps, mapDispatchToProps)(Message)
+
+export default MessageContainer

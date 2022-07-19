@@ -1,23 +1,18 @@
 import classes from "./Message.module.css";
 import React, {ChangeEvent} from "react";
-import {MessagesDataType} from "../../../redux/store";
+import {MapDispatchToPropsType, MapStateToProps} from "./Message.Container";
 
-export type MessagePropsType = {
-    messagesData: Array<MessagesDataType>
-    newMessage: string
-    onClick: () => void
-    onChange: (newMessage: string) => void
-}
-
+export type MessagePropsType = MapStateToProps & MapDispatchToPropsType
 
 export const Message = (props: MessagePropsType) => {
+    debugger
     let resultMessage = props.messagesData.map(t =>
         <div className={classes.message} key={t.id}>
             {t.message}
         </div>
     )
     const onClickHandlerMessage = () => {
-       props.onClick()
+        props.onClick()
     }
     const onChangeHandlerNewMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessage = e.currentTarget.value

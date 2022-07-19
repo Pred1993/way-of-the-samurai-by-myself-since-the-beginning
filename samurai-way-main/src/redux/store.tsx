@@ -2,39 +2,38 @@ import profilePageReducer, {AddPostActionCreator, UpdateNewPostTextActionCreator
 import sideBarReducer from "./sidebar-reducer";
 import messagePageReducer, {AddMessageActionCreator, UpdateNewMessageActionCreator} from "./messagePage-reducer";
 
-export type MessagesDataType = {
+type MessagesDataType = {
     id: number
     message: string
 }
-
-export type DialogsDataType = {
+type DialogsDataType = {
     id: number
     name: string
     img: string
 }
-export type PostDataType = {
+type PostDataType = {
     id: number
     message: string
     likesCounts: number
     img: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     postData: Array<PostDataType>
     newText: string
 }
-
-export type MessagesPageType = {
+type MessagesPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
     newMessage: string
 }
 
-export type StateType = {
+type StateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
     sidebar: any
 }
-export type StoreType = {
+
+type StoreType = {
     _state: StateType
     _rerenderEntireTree: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
