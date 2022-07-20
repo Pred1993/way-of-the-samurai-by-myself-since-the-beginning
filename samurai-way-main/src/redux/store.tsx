@@ -1,6 +1,7 @@
 import profilePageReducer, {AddPostActionCreator, UpdateNewPostTextActionCreator} from "./profilePage-reducer";
 import sideBarReducer from "./sidebar-reducer";
 import messagePageReducer, {AddMessageActionCreator, UpdateNewMessageActionCreator} from "./messagePage-reducer";
+import {FollowUsersAC, SetUsersAC, UnfollowUsersAC} from "./usersPage-reducer";
 
 type MessagesDataType = {
     id: number
@@ -40,12 +41,15 @@ type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionType) => void
 }
+type SetUsersACType = ReturnType<typeof SetUsersAC >
+type UnfollowUsersACType = ReturnType<typeof UnfollowUsersAC >
+type FollowUsersACType = ReturnType<typeof FollowUsersAC >
 type AddPostActionType = ReturnType<typeof AddPostActionCreator>
 type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextActionCreator>
 type AddMessageActionType = ReturnType<typeof AddMessageActionCreator>
 type UpdateNewMessageActionType = ReturnType<typeof UpdateNewMessageActionCreator>
 
-export type ActionType = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageActionType
+export type ActionType = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageActionType | FollowUsersACType | UnfollowUsersACType | SetUsersACType
 
 export let store: StoreType = {
     _state: {

@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {AppStateType} from "../../../redux/redux-store";
 
-export type MapStateToProps = {
+export type MapStateToPropsType = {
     messagesData: Array<MessagesDataType>,
     newMessage: string
 }
@@ -19,7 +19,7 @@ export type MapDispatchToPropsType = {
 }
 
 
-let mapStateToProps = (state: AppStateType): MapStateToProps => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         messagesData: state.messagesPage.messagesData,
         newMessage: state.messagesPage.newMessage

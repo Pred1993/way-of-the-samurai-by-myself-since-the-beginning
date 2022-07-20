@@ -1,8 +1,9 @@
 import classes from "./Message.module.css";
 import React, {ChangeEvent} from "react";
-import {MapDispatchToPropsType, MapStateToProps} from "./Message.Container";
+import {MapDispatchToPropsType, MapStateToPropsType} from "./Message.Container";
 
-export type MessagePropsType = MapStateToProps & MapDispatchToPropsType
+
+export type MessagePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const Message = (props: MessagePropsType) => {
     debugger
