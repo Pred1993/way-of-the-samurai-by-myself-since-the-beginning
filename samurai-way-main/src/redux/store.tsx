@@ -1,7 +1,7 @@
-import profilePageReducer, {AddPostActionCreator, UpdateNewPostTextActionCreator} from "./profilePage-reducer";
+import profilePageReducer, {addPostActionCreator, updateNewPostTextActionCreator,} from "./profilePage-reducer";
 import sideBarReducer from "./sidebar-reducer";
-import messagePageReducer, {AddMessageActionCreator, UpdateNewMessageActionCreator} from "./messagePage-reducer";
-import {FollowUsersAC, SetUsersAC, UnfollowUsersAC} from "./usersPage-reducer";
+import messagePageReducer, {addMessageActionCreator, updateNewMessageActionCreator,} from "./messagePage-reducer";
+import {followUsersAC, setUsersAC, unfollowUsersAC,} from "./usersPage-reducer";
 
 type MessagesDataType = {
     id: number
@@ -41,15 +41,22 @@ type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionType) => void
 }
-type SetUsersACType = ReturnType<typeof SetUsersAC >
-type UnfollowUsersACType = ReturnType<typeof UnfollowUsersAC >
-type FollowUsersACType = ReturnType<typeof FollowUsersAC >
-type AddPostActionType = ReturnType<typeof AddPostActionCreator>
-type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextActionCreator>
-type AddMessageActionType = ReturnType<typeof AddMessageActionCreator>
-type UpdateNewMessageActionType = ReturnType<typeof UpdateNewMessageActionCreator>
+type SetUsersACType = ReturnType<typeof setUsersAC>
+type UnfollowUsersACType = ReturnType<typeof unfollowUsersAC>
+type FollowUsersACType = ReturnType<typeof followUsersAC>
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
+type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
+type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
 
-export type ActionType = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageActionType | FollowUsersACType | UnfollowUsersACType | SetUsersACType
+export type ActionType =
+    AddPostActionType
+    | UpdateNewPostTextType
+    | AddMessageActionType
+    | UpdateNewMessageActionType
+    | FollowUsersACType
+    | UnfollowUsersACType
+    | SetUsersACType
 
 export let store: StoreType = {
     _state: {

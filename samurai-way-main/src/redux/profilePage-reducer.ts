@@ -1,8 +1,8 @@
 import {ActionType} from "./store";
 
-export const AddPostActionCreator = () => ({type: "ADD-POST"}) as const
+export const addPostActionCreator = () => ({type: "ADD-POST"}) as const
 
-export const UpdateNewPostTextActionCreator = (newText: string) => ({
+export const updateNewPostTextActionCreator = (newText: string) => ({
     type: "UPDATE-NEW-POST-TEXT",
     newText: newText
 }) as const

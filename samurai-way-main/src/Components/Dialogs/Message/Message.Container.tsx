@@ -1,7 +1,7 @@
 import React from "react";
 import {
-    AddMessageActionCreator, MessagesDataType,
-    UpdateNewMessageActionCreator
+    addMessageActionCreator, MessagesDataType,
+    updateNewMessageActionCreator
 } from "../../../redux/messagePage-reducer";
 import {Message} from "./Message";
 import {connect} from "react-redux";
@@ -27,8 +27,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        onClick: () => {dispatch(AddMessageActionCreator())},
-        onChange: (newMessage: string) => {dispatch(UpdateNewMessageActionCreator(newMessage))}
+        onClick: () => {dispatch(addMessageActionCreator())},
+        onChange: (newMessage: string) => {dispatch(updateNewMessageActionCreator(newMessage))}
     }
 }
 
