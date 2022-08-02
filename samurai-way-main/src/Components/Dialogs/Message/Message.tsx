@@ -6,7 +6,6 @@ import {MapDispatchToPropsType, MapStateToPropsType} from "./Message.Container";
 export type MessagePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export const Message = (props: MessagePropsType) => {
-    debugger
     let resultMessage = props.messagesData.map(t =>
         <div className={classes.message} key={t.id}>
             {t.message}

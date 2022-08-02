@@ -16,6 +16,9 @@ export type InitialStateType = typeof initialState
 
 let initialState = {
     users: [] as Array<UsersType>,
+    totalCount: 0,
+    pageSize: 5,
+    currentPage: 1
 }
 
 
@@ -26,7 +29,11 @@ export const usersPageReducer = (state: InitialStateType = initialState, action:
         case "UNFOLLOW":
             return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
         case "SET-USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case "SET-CURRENT-PAGE":
+            return {...state, currentPage: action.currentPage}
+        case "SET-TOTAL-COUNT":
+            return {...state, totalCount: action.totalCount}
         default:
             return state
     }
@@ -50,3 +57,16 @@ export const setUsersAC = (users: Array<UsersType>) => (
     }
 ) as const
 
+export const setCurrentPageAC = (currentPage:number) => (
+    {
+        type: "SET-CURRENT-PAGE",
+        currentPage: currentPage
+    }
+) as const
+
+export const setTotalCountAC = (totalCount:number) => (
+    {
+        type: "SET-TOTAL-COUNT",
+        totalCount: totalCount
+    }
+) as const

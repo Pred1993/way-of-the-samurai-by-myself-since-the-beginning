@@ -1,7 +1,7 @@
 import profilePageReducer, {addPostActionCreator, updateNewPostTextActionCreator,} from "./profilePage-reducer";
 import sideBarReducer from "./sidebar-reducer";
 import messagePageReducer, {addMessageActionCreator, updateNewMessageActionCreator,} from "./messagePage-reducer";
-import {followUsersAC, setUsersAC, unfollowUsersAC,} from "./usersPage-reducer";
+import {followUsersAC, setCurrentPageAC, setTotalCountAC, setUsersAC, unfollowUsersAC,} from "./usersPage-reducer";
 
 type MessagesDataType = {
     id: number
@@ -48,6 +48,8 @@ type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
 type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
+type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
+type SetTotalCountActionType = ReturnType<typeof setTotalCountAC>
 
 export type ActionType =
     AddPostActionType
@@ -57,6 +59,8 @@ export type ActionType =
     | FollowUsersACType
     | UnfollowUsersACType
     | SetUsersACType
+    | SetCurrentPageActionType
+    | SetTotalCountActionType
 
 export let store: StoreType = {
     _state: {
