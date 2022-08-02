@@ -2,12 +2,12 @@ import profilePageReducer, {addPostActionCreator, updateNewPostTextActionCreator
 import sideBarReducer from "./sidebar-reducer";
 import messagePageReducer, {addMessageActionCreator, updateNewMessageActionCreator,} from "./messagePage-reducer";
 import {
-    followUsersAC,
-    setCurrentPageAC,
-    setTotalCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowUsersAC,
+    followUsers,
+    setCurrentPage,
+    setTotalCount,
+    setUsers,
+    toggleIsFetching,
+    unfollowUsers,
 } from "./usersPage-reducer";
 
 type MessagesDataType = {
@@ -48,16 +48,16 @@ type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionType) => void
 }
-type SetUsersACType = ReturnType<typeof setUsersAC>
-type UnfollowUsersACType = ReturnType<typeof unfollowUsersAC>
-type FollowUsersACType = ReturnType<typeof followUsersAC>
+type SetUsersACType = ReturnType<typeof setUsers>
+type UnfollowUsersACType = ReturnType<typeof unfollowUsers>
+type FollowUsersACType = ReturnType<typeof followUsers>
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
 type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
-type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
-type SetTotalCountActionType = ReturnType<typeof setTotalCountAC>
-type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+type SetCurrentPageActionType = ReturnType<typeof setCurrentPage>
+type SetTotalCountActionType = ReturnType<typeof setTotalCount>
+type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 
 export type ActionType =
     AddPostActionType
