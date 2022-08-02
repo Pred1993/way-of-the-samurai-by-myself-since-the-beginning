@@ -2,6 +2,7 @@ import React from 'react';
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/naruto-218x256.png";
 import {UsersType} from "../../redux/usersPage-reducer";
+
 type UsersCleanPropsType = {
     totalCount: number
     pageSize: number
@@ -26,7 +27,9 @@ const UsersClean = (props: UsersCleanPropsType) => {
         <div>
             <div>
                 {slicedPages.map((p, index) => {
-                    return <span onClick={(e) =>{props.onPageChanged(p)} } className={props.currentPage === p ? classes.selectedPage: ''} key={index}>{p}</span>
+                    return <span onClick={(e) => {
+                        props.onPageChanged(p)
+                    }} className={props.currentPage === p ? classes.selectedPage : ''} key={index}>{p}</span>
                 })}
             </div>
             <div>
