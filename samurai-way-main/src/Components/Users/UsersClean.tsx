@@ -2,6 +2,7 @@ import React from 'react';
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/naruto-218x256.png";
 import {UsersType} from "../../redux/usersPage-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersCleanPropsType = {
     totalCount: number
@@ -38,7 +39,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
                         <div key={u.id}>
                 <span>
                     <div>
-                        <img className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto} alt=""/>
+                        <NavLink to='/profile'><img className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
                     </div>
                     <div>
                         {u.followed

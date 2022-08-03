@@ -1,7 +1,11 @@
 import classes from "./ProfileInfo.module.css";
 import React from "react";
+import {ProfileUsersType} from "../../../redux/profilePage-reducer";
 
-export const ProfileInfo = () => {
+type ProfileInfoPropsType = {
+    profileUsers: ProfileUsersType
+}
+export const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div>
             <div>
@@ -9,7 +13,7 @@ export const ProfileInfo = () => {
                      src="https://million-wallpapers.ru/wallpapers/4/53/17360535230983964874/olen-na-prirode-na-fone-zakata.jpg"
                      alt="main"/>
                 <div className={classes.descriptionBlock}>
-                    ava + description
+                    <img src={props.profileUsers.photos.large}/>
                 </div>
             </div>
         </div>

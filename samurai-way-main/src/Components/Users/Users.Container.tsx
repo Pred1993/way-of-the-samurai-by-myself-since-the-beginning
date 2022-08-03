@@ -31,7 +31,7 @@ export type mapDispatchToPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 
 }
-type UsersPropsType = mapDispatchToPropsType & mapStateToPropsType
+type UsersContainerPropsType = mapDispatchToPropsType & mapStateToPropsType
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         users: state.usersPage.users,
@@ -42,7 +42,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-class UsersContainer extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
