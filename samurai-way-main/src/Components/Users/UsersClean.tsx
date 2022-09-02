@@ -39,7 +39,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
                         <div key={u.id}>
                 <span>
                     <div>
-                        <NavLink to='/profile'><img className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
+                        <NavLink to={'/profile/'+ u.id}><img className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
                     </div>
                     <div>
                         {u.followed

@@ -1,11 +1,15 @@
 import classes from "./ProfileInfo.module.css";
 import React from "react";
 import {ProfileUsersType} from "../../../redux/profilePage-reducer";
+import Preloader from "../../Common/Preloader";
 
 type ProfileInfoPropsType = {
     profileUsers: ProfileUsersType
 }
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
+    if(!props.profileUsers.userId) {
+        return <Preloader/>
+    }
     return (
         <div>
             <div>
