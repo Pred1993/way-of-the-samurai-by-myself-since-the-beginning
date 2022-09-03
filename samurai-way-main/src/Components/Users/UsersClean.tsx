@@ -3,7 +3,7 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/naruto-218x256.png";
 import {UsersType} from "../../redux/usersPage-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followUsers, UnfollowUsers} from "../../api/api";
 
 type UsersCleanPropsType = {
     totalCount: number
@@ -38,24 +38,18 @@ const UsersClean = (props: UsersCleanPropsType) => {
             <div>
                 {props.users.map(u => {
                     const onClickHandlerFollow = () => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
-                            withCredentials: true, headers: {
-                                'API-KEY': '109cdbd6-571a-45e5-80a2-833676b0684d'
-                            }
-                        }).then(response => {
-                            if (response.data.resultCode === 0) {
+                        followUsers(u.id).then(response => {
+                            debugger
+                            if (response.resultCode === 0) {
                                 props.follow(u.id)
                             }
                         })
 
                     }
                     const onClickHandlerUnFollow = () => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {
-                            withCredentials: true, headers: {
-                                'API-KEY': '109cdbd6-571a-45e5-80a2-833676b0684d'
-                            }
-                        }).then(response => {
-                            if (response.data.resultCode === 0) {
+                        UnfollowUsers(u.id).then(response => {
+                            debugger
+                            if (response.resultCode === 0) {
                                 props.unfollow(u.id)
                             }
                         })
