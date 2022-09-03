@@ -1,9 +1,8 @@
-import {ActionType} from "./store";
+import { ActionType } from './store';
 
-let initialState = {}
+let initialState = {};
 
 const sideBarReducer = (state: any = initialState, action: ActionType) => {
-
-    return state
-}
-export default sideBarReducer
+  return state;
+};
+export default sideBarReducer;

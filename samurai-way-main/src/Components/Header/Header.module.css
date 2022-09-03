@@ -1,19 +1,19 @@
 .gridHeader {
-    grid-area: header;
-    background-color: #5b5341;
+  grid-area: header;
+  background-color: #5b5341;
 }
 
 .gridHeader img {
-    width: 100px;
+  width: 100px;
 }
 
 .loginBlock {
-    float: right;
-    color: white;
+  float: right;
+  color: white;
 }
 
 .loginBlock a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
 }

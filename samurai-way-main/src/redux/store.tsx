@@ -1,45 +1,46 @@
-import {addPost, setProfileUsers, updateNewPostText,} from "./profilePage-reducer";
-import {addMessageActionCreator, updateNewMessageActionCreator,} from "./messagePage-reducer";
+import { addPost, setProfileUsers, updateNewPostText } from './profilePage-reducer';
+import { addMessageActionCreator, updateNewMessageActionCreator } from './messagePage-reducer';
 import {
-    followUsers,
-    setCurrentPage,
-    setTotalCount,
-    setUsers,
-    toggleIsFetching,
-    unfollowUsers,
-} from "./usersPage-reducer";
-import {setUserData} from "./auth-reducer";
+  followUsers,
+  setCurrentPage,
+  setTotalCount,
+  setUsers,
+  toggleIsFetching,
+  toggleIsFollowingProgress,
+  unfollowUsers,
+} from './usersPage-reducer';
+import { setUserData } from './auth-reducer';
 
-type MessagesDataType = {
-    id: number
-    message: string
-}
-type DialogsDataType = {
-    id: number
-    name: string
-    img: string
-}
-type PostDataType = {
-    id: number
-    message: string
-    likesCounts: number
-    img: string
-}
-type ProfilePageType = {
-    postData: Array<PostDataType>
-    newText: string
-}
-type MessagesPageType = {
-    dialogsData: Array<DialogsDataType>
-    messagesData: Array<MessagesDataType>
-    newMessage: string
-}
+// type MessagesDataType = {
+//   id: number;
+//   message: string;
+// };
+// type DialogsDataType = {
+//   id: number;
+//   name: string;
+//   img: string;
+// };
+// type PostDataType = {
+//   id: number;
+//   message: string;
+//   likesCounts: number;
+//   img: string;
+// };
+// type ProfilePageType = {
+//   postData: Array<PostDataType>;
+//   newText: string;
+// };
+// type MessagesPageType = {
+//   dialogsData: Array<DialogsDataType>;
+//   messagesData: Array<MessagesDataType>;
+//   newMessage: string;
+// };
 
-type StateType = {
-    profilePage: ProfilePageType
-    messagesPage: MessagesPageType
-    sidebar: any
-}
+// type StateType = {
+//   profilePage: ProfilePageType;
+//   messagesPage: MessagesPageType;
+//   sidebar: any;
+// };
 
 // type StoreType = {
 //     _state: StateType
@@ -48,31 +49,34 @@ type StateType = {
 //     getState: () => StateType
 //     dispatch: (action: ActionType) => void
 // }
-type SetUsersACType = ReturnType<typeof setUsers>
-type UnfollowUsersACType = ReturnType<typeof unfollowUsers>
-type FollowUsersACType = ReturnType<typeof followUsers>
-type AddPostACType = ReturnType<typeof addPost>
-type UpdateNewPostTextACType = ReturnType<typeof updateNewPostText>
-type SetProfileUsersACType = ReturnType<typeof setProfileUsers>
-type AddMessageACType = ReturnType<typeof addMessageActionCreator>
-type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>
-type SetCurrentPageACType = ReturnType<typeof setCurrentPage>
-type SetTotalCountACType = ReturnType<typeof setTotalCount>
-type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
-type SetUserDataACType = ReturnType<typeof setUserData>
+type SetUsersACType = ReturnType<typeof setUsers>;
+type UnfollowUsersACType = ReturnType<typeof unfollowUsers>;
+type FollowUsersACType = ReturnType<typeof followUsers>;
+type AddPostACType = ReturnType<typeof addPost>;
+type UpdateNewPostTextACType = ReturnType<typeof updateNewPostText>;
+type SetProfileUsersACType = ReturnType<typeof setProfileUsers>;
+type AddMessageACType = ReturnType<typeof addMessageActionCreator>;
+type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>;
+type SetCurrentPageACType = ReturnType<typeof setCurrentPage>;
+type SetTotalCountACType = ReturnType<typeof setTotalCount>;
+type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>;
+type SetUserDataACType = ReturnType<typeof setUserData>;
+type ToggleIsFollowingACType = ReturnType<typeof toggleIsFollowingProgress>;
+
 export type ActionType =
-    AddPostACType
-    | UpdateNewPostTextACType
-    | SetProfileUsersACType
-    | AddMessageACType
-    | UpdateNewMessageACType
-    | FollowUsersACType
-    | UnfollowUsersACType
-    | SetUsersACType
-    | SetCurrentPageACType
-    | SetTotalCountACType
-    | ToggleIsFetchingACType
-    | SetUserDataACType
+  | AddPostACType
+  | UpdateNewPostTextACType
+  | SetProfileUsersACType
+  | AddMessageACType
+  | UpdateNewMessageACType
+  | FollowUsersACType
+  | UnfollowUsersACType
+  | SetUsersACType
+  | SetCurrentPageACType
+  | SetTotalCountACType
+  | ToggleIsFetchingACType
+  | SetUserDataACType
+  | ToggleIsFollowingACType;
 
 // export let store: StoreType = {
 //     _state: {
@@ -161,6 +165,3 @@ export type ActionType =
 //         this._rerenderEntireTree(this._state)
 //     }
 // }
-
-
-
