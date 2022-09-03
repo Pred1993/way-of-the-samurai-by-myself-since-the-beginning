@@ -3,6 +3,7 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/naruto-218x256.png";
 import {UsersType} from "../../redux/usersPage-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersCleanPropsType = {
     totalCount: number
@@ -24,6 +25,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
     let curPF = ((curP - 5) < 0) ? 0 : curP - 5
     let curPL = curP + 5
     let slicedPages = pages.slice(curPF, curPL)
+
     return (
         <div>
             <div>
@@ -35,20 +37,40 @@ const UsersClean = (props: UsersCleanPropsType) => {
             </div>
             <div>
                 {props.users.map(u => {
+                    const onClickHandlerFollow = () => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
+                            withCredentials: true, headers: {
+                                'API-KEY': '109cdbd6-571a-45e5-80a2-833676b0684d'
+                            }
+                        }).then(response => {
+                            if (response.data.resultCode === 0) {
+                                props.follow(u.id)
+                            }
+                        })
+
+                    }
+                    const onClickHandlerUnFollow = () => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {
+                            withCredentials: true, headers: {
+                                'API-KEY': '109cdbd6-571a-45e5-80a2-833676b0684d'
+                            }
+                        }).then(response => {
+                            if (response.data.resultCode === 0) {
+                                props.unfollow(u.id)
+                            }
+                        })
+                    }
                     return (
                         <div key={u.id}>
                 <span>
                     <div>
-                        <NavLink to={'/profile/'+ u.id}><img className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
+                        <NavLink to={'/profile/' + u.id}><img className={classes.img}
+                                                              src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
-                                props.unfollow(u.id)
-                            }}>Unfollow</button>
-                            : <button onClick={() => {
-                                props.follow(u.id)
-                            }}>Follow</button>}
+                            ? <button onClick={onClickHandlerUnFollow}>Unfollow</button>
+                            : <button onClick={onClickHandlerFollow}>Follow</button>}
                     </div>
                 </span>
                             <span>
