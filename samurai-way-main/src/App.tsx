@@ -9,12 +9,13 @@ import {Setting} from "./Components/Setting/Setting";
 import {News} from "./Components/News/News";
 import UsersContainer from "./Components/Users/Users.Container";
 import ProfileContainer from "./Components/Profile/ProfileInfo/Profile.Container";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 
 function App() {
     return (
             <div className='app'>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className='appContent'>
                     <Route path='/dialogs' render={() => <Dialogs/>}/>

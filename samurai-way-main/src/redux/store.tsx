@@ -8,6 +8,7 @@ import {
     toggleIsFetching,
     unfollowUsers,
 } from "./usersPage-reducer";
+import {setUserData} from "./auth-reducer";
 
 type MessagesDataType = {
     id: number
@@ -58,7 +59,7 @@ type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>
 type SetCurrentPageACType = ReturnType<typeof setCurrentPage>
 type SetTotalCountACType = ReturnType<typeof setTotalCount>
 type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
-
+type SetUserDataACType = ReturnType<typeof setUserData>
 export type ActionType =
     AddPostACType
     | UpdateNewPostTextACType
@@ -71,6 +72,7 @@ export type ActionType =
     | SetCurrentPageACType
     | SetTotalCountACType
     | ToggleIsFetchingACType
+    | SetUserDataACType
 
 // export let store: StoreType = {
 //     _state: {

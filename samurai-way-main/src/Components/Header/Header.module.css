@@ -6,3 +6,14 @@
 .gridHeader img {
     width: 100px;
 }
+
+.loginBlock {
+    float: right;
+    color: white;
+}
+
+.loginBlock a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
