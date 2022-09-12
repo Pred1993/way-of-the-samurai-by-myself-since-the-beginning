@@ -1,4 +1,4 @@
-import { ActionType } from './store';
+import {ActionType} from "./redux-store";
 
 export type InitialStateType = {
   id: number | null;
@@ -7,6 +7,10 @@ export type InitialStateType = {
   isAuth: boolean;
 };
 
+type SetUserDataACType = ReturnType<typeof setUserData>;
+
+export type ActionAuthPageType = SetUserDataACType
+
 let initialState = {
   id: null,
   login: null,
@@ -14,7 +18,7 @@ let initialState = {
   isAuth: false, // вводим для проверки пришли или нет наши данные
 };
 
-export const AuthReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+export const AuthReducer = (state: InitialStateType = initialState, action: ActionAuthPageType): InitialStateType => {
   switch (action.type) {
     case 'SET_USER_DATA':
       return { ...state, ...action.data, isAuth: true };

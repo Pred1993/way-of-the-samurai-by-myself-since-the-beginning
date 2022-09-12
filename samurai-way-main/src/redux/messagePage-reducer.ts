@@ -1,5 +1,3 @@
-import { ActionType } from './store';
-
 export const addMessageActionCreator = () => ({ type: 'ADD-MESSAGE' } as const);
 
 export const updateNewMessageActionCreator = (newMessage: string) =>
@@ -8,6 +6,11 @@ export const updateNewMessageActionCreator = (newMessage: string) =>
     newMessage: newMessage,
   } as const);
 
+type AddMessageACType = ReturnType<typeof addMessageActionCreator>;
+type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>;
+
+export type ActionMessagePageType = AddMessageACType | UpdateNewMessageACType
+  
 export type DialogsDataType = {
   id: number;
   name: string;
@@ -57,7 +60,7 @@ let initialState: InitialStateType = {
   newMessage: '',
 };
 
-const messagePageReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+const messagePageReducer = (state: InitialStateType = initialState, action: ActionMessagePageType): InitialStateType => {
   switch (action.type) {
     case 'ADD-MESSAGE':
       const newObjectMessageData = {

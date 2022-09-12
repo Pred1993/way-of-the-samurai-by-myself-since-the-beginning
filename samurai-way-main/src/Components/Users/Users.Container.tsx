@@ -1,19 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { AppStateType } from '../../redux/redux-store';
+import {connect} from 'react-redux';
+import {AppStateType} from '../../redux/redux-store';
 import {
-  followUsers,
+  followUsers, followUsersThunkCreator,
+  getUsersThunkCreator,
   setCurrentPage,
   setTotalCount,
   setUsers,
   toggleIsFetching,
   toggleIsFollowingProgress,
-  unfollowUsers,
+  unfollowUsers, unFollowUsersThunkCreator,
   UsersType,
 } from '../../redux/usersPage-reducer';
 import UsersClean from './UsersClean';
 import Preloader from '../Common/Preloader';
-import { getUsers } from '../../api/api';
 
 export type mapStateToPropsType = {
   users: Array<UsersType>;
@@ -25,13 +25,16 @@ export type mapStateToPropsType = {
 };
 
 export type mapDispatchToPropsType = {
-  followUsers: (userID: number) => void;
-  unfollowUsers: (userID: number) => void;
-  setUsers: (users: Array<UsersType>) => void;
+  // followUsers: (userID: number) => void;
+  // unfollowUsers: (userID: number) => void;
+  // setUsers: (users: Array<UsersType>) => void;
   setCurrentPage: (currentPage: number) => void;
-  setTotalCount: (totalCount: number) => void;
-  toggleIsFetching: (isFetching: boolean) => void;
-  toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void;
+  // setTotalCount: (totalCount: number) => void;
+  // toggleIsFetching: (isFetching: boolean) => void;
+  // toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void;
+  getUsersThunkCreator: (currentPage: number, pageSize: number) => void
+  followUsersThunkCreator: (userId: number) => void
+  unFollowUsersThunkCreator: (userId: number) => void
 };
 type UsersContainerPropsType = mapDispatchToPropsType & mapStateToPropsType;
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
@@ -47,23 +50,25 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
+    // this.props.toggleIsFetching(true);
+    //
+    // getUsers(this.props.currentPage, this.props.pageSize).then((response) => {
+    //   this.props.toggleIsFetching(false);
+    //   this.props.setUsers(response.items);
+    //   this.props.setTotalCount(response.totalCount);
+    // });
+    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
 
-    getUsers(this.props.currentPage, this.props.pageSize).then((response) => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(response.items);
-      this.props.setTotalCount(response.totalCount);
-    });
   }
 
   onPageChanged = (p: number) => {
-    this.props.toggleIsFetching(true);
-    this.props.setCurrentPage(p);
-
-    getUsers(p, this.props.pageSize).then((response) => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(response.items);
-    });
+    // this.props.toggleIsFetching(true);
+    // getUsers(p, this.props.pageSize).then((response) => {
+    //   this.props.toggleIsFetching(false);
+    //   this.props.setUsers(response.items);
+    // });
+    this.props.getUsersThunkCreator(p, this.props.pageSize);
+    this.props.setCurrentPage(p)
   };
 
   render() {
@@ -76,10 +81,12 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
           currentPage={this.props.currentPage}
           onPageChanged={this.onPageChanged}
           users={this.props.users}
-          unfollow={this.props.unfollowUsers}
-          follow={this.props.followUsers}
-          toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+          // unfollowUsers={this.props.unfollowUsers}
+          // followUsers={this.props.followUsers}
+          // toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
           followingInProgress={this.props.followingInProgress}
+          followUsersThunkCreator={this.props.followUsersThunkCreator}
+          unFollowUsersThunkCreator={this.props.unFollowUsersThunkCreator}
         />
       </>
     );
@@ -88,33 +95,28 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
 // let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 //     return {
-//         follow: (userID: number) => {
-//             dispatch(followUsersAC(userID))
+//       followUsers: (userID: number) => {
+//             dispatch(followUsers(userID))
 //         },
-//         unfollow: (userID: number) => {
-//             dispatch(unfollowUsersAC(userID))
+//       unfollowUsers: (userID: number) => {
+//             dispatch(unfollowUsers(userID))
 //         },
-//         setUsers: (users: Array<UsersType>) => {
-//             dispatch(setUsersAC(users))
+//       setUsers: (users: Array<UsersType>) => {
+//             dispatch(setUsers(users))
 //         },
-//         setCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPageAC(currentPage))
+//       setCurrentPage: (currentPage: number) => {
+//             dispatch(setCurrentPage(currentPage))
 //         },
-//         setTotalCount: (totalCount: number) => {
-//             dispatch(setTotalCountAC(totalCount))
+//       setTotalCount: (totalCount: number) => {
+//             dispatch(setTotalCount(totalCount))
 //         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
+//       toggleIsFetching: (isFetching) => {
+//             dispatch(toggleIsFetching(isFetching))
+//         },
+//       toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => {
+//         dispatch(toggleIsFollowingProgress(followingInProgress, userId))
+//       }
 //     }
 // }
 
-export default connect(mapStateToProps, {
-  followUsers,
-  unfollowUsers,
-  setUsers,
-  setCurrentPage,
-  setTotalCount,
-  toggleIsFetching,
-  toggleIsFollowingProgress,
-})(UsersContainer);
+export default connect(mapStateToProps, {setCurrentPage, getUsersThunkCreator, followUsersThunkCreator, unFollowUsersThunkCreator})(UsersContainer);

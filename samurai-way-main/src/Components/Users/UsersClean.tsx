@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/naruto-218x256.png';
-import { UsersType } from '../../redux/usersPage-reducer';
-import { NavLink } from 'react-router-dom';
-import { followUsers, UnfollowUsers } from '../../api/api';
+import {unFollowUsersThunkCreator, UsersType} from '../../redux/usersPage-reducer';
+import {NavLink} from 'react-router-dom';
+import {follow, unfollow} from '../../api/api';
 
 type UsersCleanPropsType = {
   totalCount: number;
@@ -11,10 +11,12 @@ type UsersCleanPropsType = {
   currentPage: number;
   onPageChanged: (p: number) => void;
   users: Array<UsersType>;
-  unfollow: (id: number) => void;
-  follow: (id: number) => void;
-  toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void;
+  // unfollowUsers: (id: number) => void;
+  // followUsers: (id: number) => void;
+  // toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void;
   followingInProgress: Array<number>;
+  followUsersThunkCreator: (userId: number) => void
+  unFollowUsersThunkCreator: (userId: number) => void
 };
 
 const UsersClean = (props: UsersCleanPropsType) => {
@@ -48,22 +50,25 @@ const UsersClean = (props: UsersCleanPropsType) => {
       <div>
         {props.users.map((u) => {
           const onClickHandlerFollow = () => {
-            props.toggleIsFollowingProgress(true, u.id);
-            followUsers(u.id).then((response) => {
-              if (response.resultCode === 0) {
-                props.follow(u.id);
-              }
-              props.toggleIsFollowingProgress(false, u.id);
-            });
+            // props.toggleIsFollowingProgress(true, u.id);
+            // follow(u.id).then((response) => {
+            //   if (response.resultCode === 0) {
+            //     props.followUsers(u.id);
+            //   }
+            //   props.toggleIsFollowingProgress(false, u.id);
+            // });
+            props.followUsersThunkCreator(u.id)
           };
           const onClickHandlerUnFollow = () => {
-            props.toggleIsFollowingProgress(true, u.id);
-            UnfollowUsers(u.id).then((response) => {
-              if (response.resultCode === 0) {
-                props.unfollow(u.id);
-              }
-              props.toggleIsFollowingProgress(false, u.id);
-            });
+            // props.toggleIsFollowingProgress(true, u.id);
+            // unfollow(u.id).then((response
+            // ) => {
+            //   if (response.resultCode === 0) {
+            //     props.unfollowUsers(u.id);
+            //   }
+            //   props.toggleIsFollowingProgress(false, u.id);
+            // });
+            props.unFollowUsersThunkCreator(u.id)
           };
           return (
             <div key={u.id}>

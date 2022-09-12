@@ -13,7 +13,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
   return instance.get(baseUrl + `users?page=${currentPage}&count=${pageSize}`).then((response) => response.data);
 };
 
-export const followUsers = (userId: number) => {
+export const follow = (userId: number) => {
   return axios
     .post(
       baseUrl + `follow/${userId}`,
@@ -28,7 +28,7 @@ export const followUsers = (userId: number) => {
     .then((response) => response.data);
 };
 
-export const UnfollowUsers = (userId: number) => {
+export const unfollow = (userId: number) => {
   return axios
     .delete(baseUrl + `follow/${userId}`, {
       withCredentials: true,

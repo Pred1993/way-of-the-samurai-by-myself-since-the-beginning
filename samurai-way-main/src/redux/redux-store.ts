@@ -1,9 +1,11 @@
-import { combineReducers, legacy_createStore as createStore } from 'redux';
-import profilePageReducer from './profilePage-reducer';
-import messagePageReducer from './messagePage-reducer';
+import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
+import profilePageReducer, {ActionProfilePageType} from './profilePage-reducer';
+import messagePageReducer, {ActionMessagePageType} from './messagePage-reducer';
 import sideBarReducer from './sidebar-reducer';
-import { usersPageReducer } from './usersPage-reducer';
-import { AuthReducer } from './auth-reducer';
+import {ActionUserPageType, usersPageReducer} from './usersPage-reducer';
+import {ActionAuthPageType, AuthReducer} from './auth-reducer';
+import {ThunkAction} from "redux-thunk";
+import thunkMiddleware from "redux-thunk"
 
 let rootReducer = combineReducers({
   profilePage: profilePageReducer,
@@ -14,8 +16,16 @@ let rootReducer = combineReducers({
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>;
+export type ActionType = ActionUserPageType | ActionProfilePageType | ActionMessagePageType | ActionAuthPageType
 
-export let store = createStore(rootReducer);
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    AppStateType,
+    unknown,
+    ActionType
+    >
+
+export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // @ts-ignore
 window.store = store;
 

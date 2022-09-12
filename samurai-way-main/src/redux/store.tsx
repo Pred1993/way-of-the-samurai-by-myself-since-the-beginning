@@ -49,34 +49,6 @@ import { setUserData } from './auth-reducer';
 //     getState: () => StateType
 //     dispatch: (action: ActionType) => void
 // }
-type SetUsersACType = ReturnType<typeof setUsers>;
-type UnfollowUsersACType = ReturnType<typeof unfollowUsers>;
-type FollowUsersACType = ReturnType<typeof followUsers>;
-type AddPostACType = ReturnType<typeof addPost>;
-type UpdateNewPostTextACType = ReturnType<typeof updateNewPostText>;
-type SetProfileUsersACType = ReturnType<typeof setProfileUsers>;
-type AddMessageACType = ReturnType<typeof addMessageActionCreator>;
-type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>;
-type SetCurrentPageACType = ReturnType<typeof setCurrentPage>;
-type SetTotalCountACType = ReturnType<typeof setTotalCount>;
-type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>;
-type SetUserDataACType = ReturnType<typeof setUserData>;
-type ToggleIsFollowingACType = ReturnType<typeof toggleIsFollowingProgress>;
-
-export type ActionType =
-  | AddPostACType
-  | UpdateNewPostTextACType
-  | SetProfileUsersACType
-  | AddMessageACType
-  | UpdateNewMessageACType
-  | FollowUsersACType
-  | UnfollowUsersACType
-  | SetUsersACType
-  | SetCurrentPageACType
-  | SetTotalCountACType
-  | ToggleIsFetchingACType
-  | SetUserDataACType
-  | ToggleIsFollowingACType;
 
 // export let store: StoreType = {
 //     _state: {
