@@ -11,6 +11,7 @@ import { AppStateType } from '../../../redux/redux-store';
 export type MapStateToPropsType = {
   messagesData: Array<MessagesDataType>;
   newMessage: string;
+  isAuth: boolean
 };
 
 export type MapDispatchToPropsType = {
@@ -22,6 +23,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   return {
     messagesData: state.messagesPage.messagesData,
     newMessage: state.messagesPage.newMessage,
+    isAuth: state.auth.isAuth // достаем эту переменную для редиректа (залогинились или нет)
+
   };
 };
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
