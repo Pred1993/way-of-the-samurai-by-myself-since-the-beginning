@@ -1,4 +1,5 @@
-import {ActionType} from "./redux-store";
+import {AppThunk} from "./redux-store";
+import {authMeApi} from "../api/api";
 
 export type InitialStateType = {
   id: number | null;
@@ -43,3 +44,13 @@ export const setUserData = (id: number, login: string, email: string) =>
 //     type: "UNFOLLOW",
 //     userID: userID
 // }) as const
+
+export const getAuthUserDataThunkCreator = (): AppThunk => {
+  return (dispatch) => {
+    authMeApi().then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setUserData(response.data.data.id, response.data.data.login, response.data.data.email));
+      }
+    });
+  }
+}

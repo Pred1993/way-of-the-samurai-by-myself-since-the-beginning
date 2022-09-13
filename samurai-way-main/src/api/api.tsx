@@ -9,11 +9,11 @@ const instance = axios.create({
 });
 // create подкапотная функция axios которая позволяет вынести аргумент config в отдельную переменную. Оставил как пример изначального сонтаксиса followUsers и UnfollowUsers. В запросе post config передается третим аргументом, а в запросе delete и get вторым
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const getUsersApi = (currentPage: number, pageSize: number) => {
   return instance.get(baseUrl + `users?page=${currentPage}&count=${pageSize}`).then((response) => response.data);
 };
 
-export const follow = (userId: number) => {
+export const followApi = (userId: number) => {
   return axios
     .post(
       baseUrl + `follow/${userId}`,
@@ -28,7 +28,7 @@ export const follow = (userId: number) => {
     .then((response) => response.data);
 };
 
-export const unfollow = (userId: number) => {
+export const unfollowApi = (userId: number) => {
   return axios
     .delete(baseUrl + `follow/${userId}`, {
       withCredentials: true,
@@ -37,4 +37,12 @@ export const unfollow = (userId: number) => {
       },
     })
     .then((response) => response.data);
+};
+
+export const setProfileApi = (userId: string) => {
+    return instance.get(baseUrl + `profile/${userId}`)
+};
+
+export const authMeApi = () => {
+    return instance.get(baseUrl + `/auth/me`)
 };

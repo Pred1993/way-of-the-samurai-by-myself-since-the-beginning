@@ -1,4 +1,5 @@
-import {ActionType} from "./redux-store";
+import {AppThunk} from "./redux-store";
+import {setProfileApi} from "../api/api";
 
 export const addPost = () => ({type: 'ADD-POST'} as const);
 
@@ -110,3 +111,11 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
 };
 
 export default profilePageReducer;
+
+export const getProfileThunkCreator = (userId: string): AppThunk => {
+    return (dispatch) => {
+        setProfileApi(userId).then((response) => {
+            dispatch(setProfileUsers(response.data));
+        });
+    }
+}

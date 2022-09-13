@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/naruto-218x256.png';
-import {unFollowUsersThunkCreator, UsersType} from '../../redux/usersPage-reducer';
+import {UsersType} from '../../redux/usersPage-reducer';
 import {NavLink} from 'react-router-dom';
-import {follow, unfollow} from '../../api/api';
 
 type UsersCleanPropsType = {
   totalCount: number;
@@ -36,7 +35,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
         {slicedPages.map((p, index) => {
           return (
             <span
-              onClick={(e) => {
+              onClick={() => {
                 props.onPageChanged(p);
               }}
               className={props.currentPage === p ? classes.selectedPage : ''}
@@ -75,7 +74,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
               <span>
                 <div>
                   <NavLink to={'/profile/' + u.id}>
-                    <img className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto} />
+                    <img alt={''} className={classes.img} src={u.photos.small !== null ? u.photos.small : userPhoto} />
                   </NavLink>
                 </div>
                 <div>

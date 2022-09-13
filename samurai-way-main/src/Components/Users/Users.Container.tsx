@@ -2,14 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {
-  followUsers, followUsersThunkCreator,
+  followUsersThunkCreator,
   getUsersThunkCreator,
   setCurrentPage,
-  setTotalCount,
-  setUsers,
-  toggleIsFetching,
-  toggleIsFollowingProgress,
-  unfollowUsers, unFollowUsersThunkCreator,
+  unFollowUsersThunkCreator,
   UsersType,
 } from '../../redux/usersPage-reducer';
 import UsersClean from './UsersClean';

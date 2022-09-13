@@ -1,4 +1,4 @@
-import {follow, getUsers, unfollow} from "../api/api";
+import {followApi, getUsersApi, unfollowApi} from "../api/api";
 import {AppThunk} from "./redux-store";
 
 type FollowUsersACType = ReturnType<typeof followUsers>;
@@ -106,7 +106,7 @@ export const toggleIsFollowingProgress = (disabledButton: boolean, userId: numbe
 export const getUsersThunkCreator = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
-        getUsers(currentPage, pageSize).then((response) => {
+        getUsersApi(currentPage, pageSize).then((response) => {
             dispatch(toggleIsFetching(false));
             dispatch(setUsers(response.items));
             dispatch(setTotalCount(response.totalCount));
@@ -117,7 +117,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): App
 export const followUsersThunkCreator = (userId: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId));
-        follow(userId).then((response) => {
+        followApi(userId).then((response) => {
             if (response.resultCode === 0) {
                 dispatch(followUsers(userId));
             }
@@ -129,7 +129,7 @@ export const followUsersThunkCreator = (userId: number): AppThunk => {
 export const unFollowUsersThunkCreator = (userId: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId));
-        unfollow(userId).then((response) => {
+        unfollowApi(userId).then((response) => {
             if (response.resultCode === 0) {
                 dispatch(unfollowUsers(userId));
             }
