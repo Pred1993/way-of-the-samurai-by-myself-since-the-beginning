@@ -8,7 +8,6 @@ type ProfilePropsType = {
 };
 
 export const Profile = (props: ProfilePropsType) => {
-    debugger
   return (
     <main>
       <ProfileInfo profileUsers={props.profileUsers.profileUsers} />

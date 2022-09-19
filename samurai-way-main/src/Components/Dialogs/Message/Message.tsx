@@ -1,7 +1,6 @@
 import classes from './Message.module.css';
-import React, { ChangeEvent } from 'react';
-import { MapDispatchToPropsType, MapStateToPropsType } from './Message.Container';
-import {Redirect} from "react-router-dom";
+import React, {ChangeEvent} from 'react';
+import {MapDispatchToPropsType, MapStateToPropsType} from './Message.Container';
 
 export type MessagePropsType = MapStateToPropsType & MapDispatchToPropsType;
 
@@ -18,7 +17,7 @@ export const Message = (props: MessagePropsType) => {
     let newMessage = e.currentTarget.value;
     props.onChange(newMessage);
   };
-  if (!props.isAuth) return <Redirect to={'/login'}/>
+  // if (!props.isAuth) return <Redirect to={'/login'}/>
   return (
     <div>
       {resultMessage}

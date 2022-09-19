@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {
@@ -10,6 +10,8 @@ import {
 } from '../../redux/usersPage-reducer';
 import UsersClean from './UsersClean';
 import Preloader from '../Common/Preloader';
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 export type mapStateToPropsType = {
   users: Array<UsersType>;
@@ -114,5 +116,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 //       }
 //     }
 // }
+// Как мы оборачивали хоками до функции compose
+// export default WithAuthRedirect(connect(mapStateToProps, {setCurrentPage, getUsersThunkCreator, followUsersThunkCreator, unFollowUsersThunkCreator})(UsersContainer));
 
-export default connect(mapStateToProps, {setCurrentPage, getUsersThunkCreator, followUsersThunkCreator, unFollowUsersThunkCreator})(UsersContainer);
+export default compose<ComponentType>(connect(mapStateToProps, {setCurrentPage, getUsersThunkCreator, followUsersThunkCreator, unFollowUsersThunkCreator}),WithAuthRedirect)(UsersContainer)
