@@ -1,26 +1,40 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
-class ProfileStatus extends React.Component<any> {
+export type ProfileStatusType = {
+    status: string
+    updateProfileStatusThunkCreator: (status: string) => void
+}
+
+class ProfileStatus extends React.Component<ProfileStatusType> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
-    activateEditMode(){// при вызове метода записанного Function Declaration необходимо байндить и передавать контекст так как он теряется
-        debugger
+
+    activateEditMode() {// при вызове метода записанного Function Declaration необходимо байндить и передавать контекст так как он теряется из-за того, что вызов метода мы отдаём <span>, так работает JS
         this.setState({
             editMode: true
         })
     }
+
     deActivateEditMode = () => {// стрелочная функция не имеет своего контекста и берет его там, где определена, поэтому ее нет смылса байндить
-        debugger
         this.setState({
             editMode: false
         })
+        this.props.updateProfileStatusThunkCreator(this.state.status)
     }
+
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
     render() {
         return this.state.editMode ? (
-            <input value={this.props.status} onBlur={this.deActivateEditMode} autoFocus/>
+            <input onChange={this.onStatusChange} onBlur={this.deActivateEditMode} value={this.state.status} autoFocus/>
         ) : (
-            <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+            <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status || 'No status'}</span>
         );
     }
 };
