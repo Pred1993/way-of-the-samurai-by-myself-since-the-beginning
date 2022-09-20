@@ -68,7 +68,7 @@ export const profileApi = {
         return instance.get<ProfileUsersType>(baseUrl + `profile/${userId}`)
     },
     getStatus(userId: string){
-        return instance.get(baseUrl + `/profile/status/${userId}`)
+        return instance.get<string>(baseUrl + `/profile/status/${userId}`)
     },
     updateStatus(status: string){
         return instance.put<ResponseType<{}>>(baseUrl + `/profile/status`, {status: status})
