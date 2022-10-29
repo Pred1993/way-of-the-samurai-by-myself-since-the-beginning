@@ -26,10 +26,7 @@ type AddPostACType = ReturnType<typeof addPost>;
 type SetProfileUsersACType = ReturnType<typeof setProfileUsers>;
 type GetProfileStatusACType = ReturnType<typeof setProfileStatus>;
 
-export type ActionProfilePageType =
-  | SetProfileUsersACType
-  | AddPostACType
-  | GetProfileStatusACType;
+export type ActionProfilePageType = SetProfileUsersACType | AddPostACType | GetProfileStatusACType;
 
 export type ProfileUsersType = {
   userId: number;
@@ -110,7 +107,7 @@ const profilePageReducer = (
         likesCounts: 5,
         img: 'https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png',
       };
-      return { ...state, postData: [...state.postData, newObjectPostData]};
+      return { ...state, postData: [...state.postData, newObjectPostData] };
     // case 'UPDATE-NEW-POST-TEXT':
     //   return { ...state, newText: action.newText };
     case 'SET-PROFILE-USERS':

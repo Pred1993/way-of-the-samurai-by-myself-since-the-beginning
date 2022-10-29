@@ -1,9 +1,9 @@
-import {addPost, PostDataType} from '../../../redux/profilePage-reducer';
-import {MyPost} from './MyPost';
-import {Dispatch} from 'redux';
-import {connect} from 'react-redux';
-import {AppStateType} from '../../../redux/redux-store';
-import {AddNewPostFormType} from "./Post/AddNewPostForm";
+import { addPost, PostDataType } from '../../../redux/profilePage-reducer';
+import { MyPost } from './MyPost';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
+import { AddNewPostFormType } from './Post/AddNewPostForm';
 
 export type mapStateToPropsType = {
   postData: Array<PostDataType>;
@@ -17,7 +17,7 @@ export type mapDispatchToPropsType = {
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   return {
-    postData: state.profilePage.postData
+    postData: state.profilePage.postData,
   };
 };
 

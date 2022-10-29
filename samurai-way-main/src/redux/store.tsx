@@ -1,5 +1,5 @@
-import { addPost, setProfileUsers} from './profilePage-reducer';
-import { addMessageActionCreator} from './messagePage-reducer';
+import { addPost, setProfileUsers } from './profilePage-reducer';
+import { addMessageActionCreator } from './messagePage-reducer';
 import {
   followUsers,
   setCurrentPage,

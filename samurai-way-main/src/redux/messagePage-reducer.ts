@@ -9,7 +9,7 @@ export const addMessageActionCreator = (newMessage: string) => ({ type: 'ADD-MES
 type AddMessageACType = ReturnType<typeof addMessageActionCreator>;
 // type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>;
 
-export type ActionMessagePageType = AddMessageACType
+export type ActionMessagePageType = AddMessageACType;
 
 export type DialogsDataType = {
   id: number;
@@ -26,9 +26,9 @@ export type MessagesPageType = {
   messagesData: Array<MessagesDataType>;
   newMessage: string;
 };
-export type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState;
 
-let initialState= {
+let initialState = {
   dialogsData: [
     {
       id: 1,
@@ -56,7 +56,7 @@ let initialState= {
     { id: 2, message: 'Nice' },
     { id: 3, message: 'Good morning' },
     { id: 4, message: 'How are you?' },
-  ]
+  ],
 };
 
 const messagePageReducer = (
@@ -69,7 +69,7 @@ const messagePageReducer = (
         id: 5,
         message: action.newMessage,
       };
-      return { ...state, messagesData: [...state.messagesData, newObjectMessageData]};
+      return { ...state, messagesData: [...state.messagesData, newObjectMessageData] };
     // case 'UPDATE-NEW-MESSAGE':
     //   return { ...state, newMessage: action.newMessage }; // больше не нуждаемся в этом кейсе после ввода ReduxForm
     default:

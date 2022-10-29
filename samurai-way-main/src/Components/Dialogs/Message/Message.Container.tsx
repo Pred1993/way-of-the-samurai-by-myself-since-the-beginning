@@ -1,14 +1,11 @@
 import React, { ComponentType } from 'react';
-import {
-  addMessageActionCreator,
-  MessagesDataType,
-} from '../../../redux/messagePage-reducer';
+import { addMessageActionCreator, MessagesDataType } from '../../../redux/messagePage-reducer';
 import { Message } from './Message';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 import { AppStateType } from '../../../redux/redux-store';
 import { WithAuthRedirect } from '../../../hoc/withAuthRedirect';
-import {AddMessageFormDataType} from "./AddMessageForm";
+import { AddMessageFormDataType } from './AddMessageForm';
 
 export type MapStateToPropsType = {
   messagesData: Array<MessagesDataType>;
@@ -32,7 +29,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   return {
     sendMessage: (formData: AddMessageFormDataType) => {
       dispatch(addMessageActionCreator(formData.newMessageBody));
-    }
+    },
   };
 };
 

@@ -9,7 +9,7 @@ import {
   UsersType,
 } from '../../redux/usersPage-reducer';
 import UsersClean from './UsersClean';
-import Preloader from '../Common/Preloader';
+import Preloader from '../Common/Preloader/Preloader';
 import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 

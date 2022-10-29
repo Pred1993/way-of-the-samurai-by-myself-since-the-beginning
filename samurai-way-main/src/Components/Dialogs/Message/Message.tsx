@@ -1,12 +1,12 @@
 import classes from './Message.module.css';
 import React from 'react';
-import {MapDispatchToPropsType, MapStateToPropsType} from './Message.Container';
-import AddMessageForm, {AddMessageFormDataType} from "./AddMessageForm";
-import {reduxForm} from "redux-form";
+import { MapDispatchToPropsType, MapStateToPropsType } from './Message.Container';
+import AddMessageForm, { AddMessageFormDataType } from './AddMessageForm';
+import { reduxForm } from 'redux-form';
 
 export type MessagePropsType = MapStateToPropsType & MapDispatchToPropsType;
 
-const AddMessageFormRedux = reduxForm<AddMessageFormDataType>({form: 'newMessageBody'})(AddMessageForm)
+const AddMessageFormRedux = reduxForm<AddMessageFormDataType>({ form: 'newMessageBody' })(AddMessageForm);
 
 export const Message = (props: MessagePropsType) => {
   const onSubmit = (formData: AddMessageFormDataType) => {
@@ -29,7 +29,7 @@ export const Message = (props: MessagePropsType) => {
   return (
     <div>
       {resultMessage}
-      <AddMessageFormRedux onSubmit={onSubmit}/>
+      <AddMessageFormRedux onSubmit={onSubmit} />
     </div>
   );
 };
