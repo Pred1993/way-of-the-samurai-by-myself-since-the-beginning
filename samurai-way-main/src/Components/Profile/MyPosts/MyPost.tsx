@@ -1,30 +1,27 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import classes from './MyPosts.module.css';
-import { Post } from './Post/Post';
-import { mapDispatchToPropsType, mapStateToPropsType } from './MyPost.Container';
+import {Post} from './Post/Post';
+import {mapDispatchToPropsType, mapStateToPropsType} from './MyPost.Container';
+import {AddNewPostForm, AddNewPostFormType} from "./Post/AddNewPostForm";
+import {reduxForm} from "redux-form";
+
 export type MyPostPropsType = mapStateToPropsType & mapDispatchToPropsType;
 
+const AddNewPostReduxForm = reduxForm<AddNewPostFormType>({
+    form: 'newPost',
+})(AddNewPostForm);
+
 export const MyPost = (props: MyPostPropsType) => {
-  const onClickHandlerAddPost = () => {
-    props.addPost();
-  };
-  const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let text = e.currentTarget.value;
-    props.updateNewPostText(text);
-  };
+    const onSubmit = (formData: AddNewPostFormType) => {
+       props.addPost(formData)
+    };
   return (
     <div className={classes.postsBlock}>
-      <h3>My posts</h3>
-      <div>
-        <div>
-          <textarea onChange={onChangeHandler} value={props.newText} />
+        <h3>My posts</h3>
+        <AddNewPostReduxForm onSubmit={onSubmit}/>
+        <div className={classes.posts}>
+            <Post postData={props.postData}/>
         </div>
-        <button onClick={onClickHandlerAddPost}>Add post</button>
-        <button>Remove</button>
-      </div>
-      <div className={classes.posts}>
-        <Post postData={props.postData} />
-      </div>
     </div>
   );
 };

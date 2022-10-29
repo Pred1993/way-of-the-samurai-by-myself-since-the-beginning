@@ -2,12 +2,12 @@ import classes from './ProfileInfo.module.css';
 import React from 'react';
 import { ProfileUsersType } from '../../../redux/profilePage-reducer';
 import Preloader from '../../Common/Preloader';
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 type ProfileInfoPropsType = {
   profileUsers: ProfileUsersType;
-  status: string
-  updateProfileStatusThunkCreator: (status: string) => void
+  status: string;
+  updateProfileStatusThunkCreator: (status: string) => void;
 };
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
   if (!props.profileUsers.userId) {
@@ -22,9 +22,10 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         {/*  alt="main"*/}
         {/*/>*/}
         <div className={classes.descriptionBlock}>
-          <img src={props.profileUsers.photos.large}/>
-          <ProfileStatus status={props.status}
-                         updateProfileStatusThunkCreator={props.updateProfileStatusThunkCreator}
+          <img src={props.profileUsers.photos.large} />
+          <ProfileStatus
+            status={props.status}
+            updateProfileStatusThunkCreator={props.updateProfileStatusThunkCreator}
           />
         </div>
       </div>

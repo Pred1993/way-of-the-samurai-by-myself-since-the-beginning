@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/naruto-218x256.png';
-import {UsersType} from '../../redux/usersPage-reducer';
-import {NavLink} from 'react-router-dom';
+import { UsersType } from '../../redux/usersPage-reducer';
+import { NavLink } from 'react-router-dom';
 
 type UsersCleanPropsType = {
   totalCount: number;
@@ -14,8 +14,8 @@ type UsersCleanPropsType = {
   // followUsers: (id: number) => void;
   // toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void;
   followingInProgress: Array<number>;
-  followUsersThunkCreator: (userId: number) => void
-  unFollowUsersThunkCreator: (userId: number) => void
+  followUsersThunkCreator: (userId: number) => void;
+  unFollowUsersThunkCreator: (userId: number) => void;
 };
 
 const UsersClean = (props: UsersCleanPropsType) => {
@@ -56,7 +56,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
             //   }
             //   props.toggleIsFollowingProgress(false, u.id);
             // });
-            props.followUsersThunkCreator(u.id)
+            props.followUsersThunkCreator(u.id);
           };
           const onClickHandlerUnFollow = () => {
             // props.toggleIsFollowingProgress(true, u.id);
@@ -67,7 +67,7 @@ const UsersClean = (props: UsersCleanPropsType) => {
             //   }
             //   props.toggleIsFollowingProgress(false, u.id);
             // });
-            props.unFollowUsersThunkCreator(u.id)
+            props.unFollowUsersThunkCreator(u.id);
           };
           return (
             <div key={u.id}>
@@ -79,11 +79,17 @@ const UsersClean = (props: UsersCleanPropsType) => {
                 </div>
                 <div>
                   {u.followed ? (
-                    <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={onClickHandlerUnFollow}>
+                    <button
+                      disabled={props.followingInProgress.some((id) => id === u.id)}
+                      onClick={onClickHandlerUnFollow}
+                    >
                       Unfollow
                     </button>
                   ) : (
-                    <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={onClickHandlerFollow}>
+                    <button
+                      disabled={props.followingInProgress.some((id) => id === u.id)}
+                      onClick={onClickHandlerFollow}
+                    >
                       Follow
                     </button>
                   )}

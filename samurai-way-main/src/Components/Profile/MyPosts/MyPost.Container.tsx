@@ -1,33 +1,30 @@
-import { addPost, PostDataType, updateNewPostText } from '../../../redux/profilePage-reducer';
-import { MyPost } from './MyPost';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { AppStateType } from '../../../redux/redux-store';
+import {addPost, PostDataType} from '../../../redux/profilePage-reducer';
+import {MyPost} from './MyPost';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
+import {AppStateType} from '../../../redux/redux-store';
+import {AddNewPostFormType} from "./Post/AddNewPostForm";
 
 export type mapStateToPropsType = {
   postData: Array<PostDataType>;
-  newText: string;
+  // newText: string;
 };
 
 export type mapDispatchToPropsType = {
-  updateNewPostText: (text: string) => void;
-  addPost: () => void;
+  // updateNewPostText: (text: string) => void;
+  addPost: (newPost: AddNewPostFormType) => void;
 };
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   return {
-    postData: state.profilePage.postData,
-    newText: state.profilePage.newText,
+    postData: state.profilePage.postData
   };
 };
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
   return {
-    updateNewPostText: (text: string) => {
-      dispatch(updateNewPostText(text));
-    },
-    addPost: () => {
-      dispatch(addPost());
+    addPost: (newPost: AddNewPostFormType) => {
+      dispatch(addPost(newPost.newPost));
     },
   };
 };

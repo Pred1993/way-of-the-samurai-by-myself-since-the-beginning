@@ -1,6 +1,6 @@
-import React, {ComponentType} from 'react';
-import {connect} from 'react-redux';
-import {AppStateType} from '../../redux/redux-store';
+import React, { ComponentType } from 'react';
+import { connect } from 'react-redux';
+import { AppStateType } from '../../redux/redux-store';
 import {
   followUsersThunkCreator,
   getUsersThunkCreator,
@@ -10,8 +10,8 @@ import {
 } from '../../redux/usersPage-reducer';
 import UsersClean from './UsersClean';
 import Preloader from '../Common/Preloader';
-import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
+import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 export type mapStateToPropsType = {
   users: Array<UsersType>;
@@ -30,9 +30,9 @@ export type mapDispatchToPropsType = {
   // setTotalCount: (totalCount: number) => void;
   // toggleIsFetching: (isFetching: boolean) => void;
   // toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void;
-  getUsersThunkCreator: (currentPage: number, pageSize: number) => void
-  followUsersThunkCreator: (userId: number) => void
-  unFollowUsersThunkCreator: (userId: number) => void
+  getUsersThunkCreator: (currentPage: number, pageSize: number) => void;
+  followUsersThunkCreator: (userId: number) => void;
+  unFollowUsersThunkCreator: (userId: number) => void;
 };
 type UsersContainerPropsType = mapDispatchToPropsType & mapStateToPropsType;
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
@@ -55,8 +55,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     //   this.props.setUsers(response.items);
     //   this.props.setTotalCount(response.totalCount);
     // });
-    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
-
+    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = (p: number) => {
@@ -66,7 +65,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     //   this.props.setUsers(response.items);
     // });
     this.props.getUsersThunkCreator(p, this.props.pageSize);
-    this.props.setCurrentPage(p)
+    this.props.setCurrentPage(p);
   };
 
   render() {
@@ -119,4 +118,12 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 // Как мы оборачивали хоками до функции compose
 // export default WithAuthRedirect(connect(mapStateToProps, {setCurrentPage, getUsersThunkCreator, followUsersThunkCreator, unFollowUsersThunkCreator})(UsersContainer));
 
-export default compose<ComponentType>(connect(mapStateToProps, {setCurrentPage, getUsersThunkCreator, followUsersThunkCreator, unFollowUsersThunkCreator}),WithAuthRedirect)(UsersContainer)
+export default compose<ComponentType>(
+  connect(mapStateToProps, {
+    setCurrentPage,
+    getUsersThunkCreator,
+    followUsersThunkCreator,
+    unFollowUsersThunkCreator,
+  }),
+  WithAuthRedirect,
+)(UsersContainer);

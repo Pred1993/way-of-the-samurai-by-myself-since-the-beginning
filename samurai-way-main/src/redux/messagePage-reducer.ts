@@ -1,16 +1,16 @@
-export const addMessageActionCreator = () => ({ type: 'ADD-MESSAGE' } as const);
+export const addMessageActionCreator = (newMessage: string) => ({ type: 'ADD-MESSAGE', newMessage } as const);
 
-export const updateNewMessageActionCreator = (newMessage: string) =>
-  ({
-    type: 'UPDATE-NEW-MESSAGE',
-    newMessage: newMessage,
-  } as const);
+// export const updateNewMessageActionCreator = (newMessage: string) =>
+//   ({
+//     type: 'UPDATE-NEW-MESSAGE',
+//     newMessage: newMessage,
+//   } as const);
 
 type AddMessageACType = ReturnType<typeof addMessageActionCreator>;
-type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>;
+// type UpdateNewMessageACType = ReturnType<typeof updateNewMessageActionCreator>;
 
-export type ActionMessagePageType = AddMessageACType | UpdateNewMessageACType
-  
+export type ActionMessagePageType = AddMessageACType
+
 export type DialogsDataType = {
   id: number;
   name: string;
@@ -26,9 +26,9 @@ export type MessagesPageType = {
   messagesData: Array<MessagesDataType>;
   newMessage: string;
 };
-export type InitialStateType = MessagesPageType;
+export type InitialStateType = typeof initialState
 
-let initialState: InitialStateType = {
+let initialState= {
   dialogsData: [
     {
       id: 1,
@@ -56,20 +56,22 @@ let initialState: InitialStateType = {
     { id: 2, message: 'Nice' },
     { id: 3, message: 'Good morning' },
     { id: 4, message: 'How are you?' },
-  ],
-  newMessage: '',
+  ]
 };
 
-const messagePageReducer = (state: InitialStateType = initialState, action: ActionMessagePageType): InitialStateType => {
+const messagePageReducer = (
+  state: InitialStateType = initialState,
+  action: ActionMessagePageType,
+): InitialStateType => {
   switch (action.type) {
     case 'ADD-MESSAGE':
       const newObjectMessageData = {
         id: 5,
-        message: state.newMessage,
+        message: action.newMessage,
       };
-      return { ...state, messagesData: [...state.messagesData, newObjectMessageData], newMessage: '' };
-    case 'UPDATE-NEW-MESSAGE':
-      return { ...state, newMessage: action.newMessage };
+      return { ...state, messagesData: [...state.messagesData, newObjectMessageData]};
+    // case 'UPDATE-NEW-MESSAGE':
+    //   return { ...state, newMessage: action.newMessage }; // больше не нуждаемся в этом кейсе после ввода ReduxForm
     default:
       return state;
   }

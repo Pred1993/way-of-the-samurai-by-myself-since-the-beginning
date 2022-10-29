@@ -1,5 +1,5 @@
-import {AppThunk} from "./redux-store";
-import {authApi} from "../api/api";
+import { AppThunk } from './redux-store';
+import { authApi } from '../api/api';
 
 export type InitialStateType = {
   id: number | null;
@@ -10,7 +10,7 @@ export type InitialStateType = {
 
 type SetUserDataACType = ReturnType<typeof setUserData>;
 
-export type ActionAuthPageType = SetUserDataACType
+export type ActionAuthPageType = SetUserDataACType;
 
 let initialState = {
   id: null,
@@ -52,5 +52,5 @@ export const getAuthUserDataThunkCreator = (): AppThunk => {
         dispatch(setUserData(response.data.data.id, response.data.data.login, response.data.data.email));
       }
     });
-  }
-}
+  };
+};
