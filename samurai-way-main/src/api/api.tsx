@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { UsersType } from '../redux/usersPage-reducer';
 import { ProfileUsersType } from '../redux/profilePage-reducer';
+import { FormDataType } from '../Components/Login/LoginForm/LoginForm';
 const baseUrl = 'https://social-network.samuraijs.com/api/1.0/';
 
 const settings = {
@@ -80,5 +81,11 @@ export const profileApi = {
 export const authApi = {
   authMeApi() {
     return instance.get<ResponseType<authApiType>>(baseUrl + `auth/me`);
+  },
+  login(formData: FormDataType) {
+    return instance.post<ResponseType<{ usrID: string }>>(baseUrl + `auth/login`, formData);
+  },
+  logout() {
+    return instance.delete<ResponseType<{}>>(baseUrl + `auth/login`);
   },
 };
