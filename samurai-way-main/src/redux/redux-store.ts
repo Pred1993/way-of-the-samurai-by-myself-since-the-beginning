@@ -6,7 +6,7 @@ import { ActionUserPageType, usersPageReducer } from './usersPage-reducer';
 import { ActionAuthPageType, AuthReducer } from './auth-reducer';
 import { ThunkAction } from 'redux-thunk';
 import thunkMiddleware from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer, stopSubmit } from 'redux-form';
 
 let rootReducer = combineReducers({
   profilePage: profilePageReducer,
@@ -18,7 +18,12 @@ let rootReducer = combineReducers({
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>;
-export type ActionType = ActionUserPageType | ActionProfilePageType | ActionMessagePageType | ActionAuthPageType;
+export type ActionType =
+  | ActionUserPageType
+  | ActionProfilePageType
+  | ActionMessagePageType
+  | ActionAuthPageType
+  | ReturnType<typeof stopSubmit>;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionType>;
 

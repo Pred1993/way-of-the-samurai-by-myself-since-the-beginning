@@ -1,6 +1,8 @@
 import { AppThunk } from './redux-store';
 import { authApi } from '../api/api';
 import { FormDataType } from '../Components/Login/LoginForm/LoginForm';
+import login from '../Components/Login/Login';
+import { stopSubmit } from 'redux-form';
 
 export type InitialStateType = {
   id: number | null;
@@ -62,6 +64,9 @@ export const loginThunkCreator = (formData: FormDataType): AppThunk => {
     authApi.login(formData).then((response) => {
       if (response.data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator());
+      } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+        dispatch(stopSubmit('login', { _error: message }));
       }
     });
   };
