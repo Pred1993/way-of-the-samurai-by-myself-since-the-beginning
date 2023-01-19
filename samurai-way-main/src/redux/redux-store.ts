@@ -4,9 +4,10 @@ import messagePageReducer, { ActionMessagePageType } from './messagePage-reducer
 import sideBarReducer from './sidebar-reducer';
 import { ActionUserPageType, usersPageReducer } from './usersPage-reducer';
 import { ActionAuthPageType, AuthReducer } from './auth-reducer';
-import { ThunkAction } from 'redux-thunk';
+import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer, stopSubmit } from 'redux-form';
+import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 let rootReducer = combineReducers({
   profilePage: profilePageReducer,
@@ -25,7 +26,9 @@ export type ActionType =
   | ActionAuthPageType
   | ReturnType<typeof stopSubmit>;
 
+export type AppDispatchType = ThunkDispatch<AppStateType, unknown, ActionType>;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionType>;
+export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
 
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // @ts-ignore
