@@ -1,6 +1,5 @@
-import { AppThunk } from './redux-store';
+import {AppThunk} from './redux-store';
 import {authApi, LoginRegisterDataType} from '../api/api';
-import { stopSubmit } from 'redux-form';
 
 export type InitialStateType = {
   id: number | null;
@@ -20,7 +19,7 @@ let initialState = {
   isAuth: false, // вводим для проверки пришли или нет наши данные
 };
 
-export const AuthReducer = (state: InitialStateType = initialState, action: ActionAuthPageType): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: ActionAuthPageType): InitialStateType => {
   switch (action.type) {
     case 'SET_USER_DATA':
       return { ...state, ...action.data, isAuth: action.isAuth };

@@ -1,21 +1,22 @@
-import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
-import profilePageReducer, { ActionProfilePageType } from './profilePage-reducer';
-import messagePageReducer, { ActionMessagePageType } from './messagePage-reducer';
+import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
+import profilePageReducer, {ActionProfilePageType} from './profilePage-reducer';
+import messagePageReducer, {ActionMessagePageType} from './messagePage-reducer';
 import sideBarReducer from './sidebar-reducer';
-import { ActionUserPageType, usersPageReducer } from './usersPage-reducer';
-import { ActionAuthPageType, AuthReducer } from './auth-reducer';
-import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import thunkMiddleware from 'redux-thunk';
-import { reducer as formReducer, stopSubmit } from 'redux-form';
+import {ActionUserPageType, usersPageReducer} from './usersPage-reducer';
+import {ActionAuthPageType, authReducer} from './auth-reducer';
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {reducer as formReducer, stopSubmit} from 'redux-form';
 import {TypedUseSelectorHook, useSelector} from "react-redux";
+import {appReducer} from "./app-reducer";
 
 let rootReducer = combineReducers({
   profilePage: profilePageReducer,
   messagesPage: messagePageReducer,
   sidebar: sideBarReducer,
   usersPage: usersPageReducer,
-  auth: AuthReducer,
+  auth: authReducer,
   form: formReducer,
+  app: appReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>;
